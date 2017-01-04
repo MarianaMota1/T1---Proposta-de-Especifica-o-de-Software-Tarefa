@@ -1,3 +1,6 @@
+
+import java.util.Objects;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -60,10 +63,46 @@ public class Funcionario {
             throw new ErroValidacao("O atributo função deve ter no máximo 250 caracteres!");
         this.funcao = funcao;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.cpf);
+        hash = 97 * hash + Objects.hashCode(this.rg);
+        hash = 97 * hash + Objects.hashCode(this.nome);
+        hash = 97 * hash + Objects.hashCode(this.funcao);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Funcionario other = (Funcionario) obj;
+        if (!Objects.equals(this.rg, other.rg)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return Objects.equals(this.funcao, other.funcao);
+    }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" + "cpf=" + cpf + ", rg=" + rg + ", nome=" + nome + ", funcao=" + funcao + '}';
+    }
+    
     
     
           
-    
     
     
 }

@@ -1,3 +1,6 @@
+
+import java.util.Objects;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -57,6 +60,47 @@ public class Produto {
     public void setPrecoUnitario(float precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + this.codigo;
+        hash = 29 * hash + Objects.hashCode(this.nome);
+        hash = 29 * hash + Objects.hashCode(this.descricao);
+        hash = 29 * hash + Float.floatToIntBits(this.precoUnitario);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Produto other = (Produto) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.precoUnitario) != Float.floatToIntBits(other.precoUnitario)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return Objects.equals(this.descricao, other.descricao);
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" + "codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + ", precoUnitario=" + precoUnitario + '}';
+    }
+    
+    
     
     
     
