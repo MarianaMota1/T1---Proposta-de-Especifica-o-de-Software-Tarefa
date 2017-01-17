@@ -1,4 +1,5 @@
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /*
@@ -16,9 +17,9 @@ public class Produto {
     private int codigo;
     private String nome;
     private String descricao;
-    private float precoUnitario;
+    private BigDecimal precoUnitario;
 
-    public Produto(int codigo, String nome, String descricao, float precoUnitario) {
+    public Produto(int codigo, String nome, String descricao, BigDecimal precoUnitario) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
@@ -53,21 +54,21 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public float getPrecoUnitario() {
+    public BigDecimal getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public void setPrecoUnitario(float precoUnitario) {
+    public void setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 29 * hash + this.codigo;
-        hash = 29 * hash + Objects.hashCode(this.nome);
-        hash = 29 * hash + Objects.hashCode(this.descricao);
-        hash = 29 * hash + Float.floatToIntBits(this.precoUnitario);
+        hash = 59 * hash + this.codigo;
+        hash = 59 * hash + Objects.hashCode(this.nome);
+        hash = 59 * hash + Objects.hashCode(this.descricao);
+        hash = 59 * hash + Objects.hashCode(this.precoUnitario);
         return hash;
     }
 
@@ -86,13 +87,13 @@ public class Produto {
         if (this.codigo != other.codigo) {
             return false;
         }
-        if (Float.floatToIntBits(this.precoUnitario) != Float.floatToIntBits(other.precoUnitario)) {
-            return false;
-        }
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
-        return Objects.equals(this.descricao, other.descricao);
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        return Objects.equals(this.precoUnitario, other.precoUnitario);
     }
 
     @Override
@@ -101,9 +102,9 @@ public class Produto {
     }
     
     
+
     
-    
-    
+
     
     
 }
