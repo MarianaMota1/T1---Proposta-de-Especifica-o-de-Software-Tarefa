@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Cliente {
     private String cpf;
     private String rg;
-    private String endereco;
+    private String endereco; 
     private String telefone;
     private String nome;
 
