@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package loja;
+
+package psc_aplicacao;
 
 /**
  *
  * @author Mary
  */
-public class Loja {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public interface Entidade {
+    public int getId();
+    
+    public void setId(int id);
     
 }

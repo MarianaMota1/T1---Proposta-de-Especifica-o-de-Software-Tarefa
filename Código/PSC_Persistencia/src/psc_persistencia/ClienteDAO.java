@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 
+package psc_persistencia;
+
+
 /**
  *
  * @author Mary
  */
-public class ClienteDAO extends DAOGenerico implements ClienteRepositorio{
+public class ClienteDAO {
     
-
+    
 }

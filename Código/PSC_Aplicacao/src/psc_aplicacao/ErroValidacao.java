@@ -3,11 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package psc_aplicacao;
 
 /**
  *
  * @author Mary
  */
-public interface VendaRepositorio extends Repositorio<Venda>{
+class ErroValidacao extends Exception {
+    
+    public ErroValidacao(String message) {
+        super(message);
+    }
+    
     
 }

@@ -3,14 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package psc_persistencia;
 
 /**
  *
  * @author Mary
  */
-public interface Entidade {
-    public int getId();
-    
-    public void setId(int id);
+public class PSC_Persistencia {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+    }
     
 }

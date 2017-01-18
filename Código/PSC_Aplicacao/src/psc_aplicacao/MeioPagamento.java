@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package psc_aplicacao;
 
 /**
  *
  * @author Mary
  */
-public class FormaPagamento {
+public class MeioPagamento {
     
     private int id;
-    private String tipoPagamento;
+    private String meioPagemento;
 
-    public FormaPagamento(int id, String tipoPagamento) {
+    public MeioPagamento(int id, String meioPagemento) {
         this.id = id;
-        this.tipoPagamento = tipoPagamento;
+        this.meioPagemento = meioPagemento;
     }
 
     public int getId() {
@@ -26,12 +27,12 @@ public class FormaPagamento {
         this.id = id;
     }
 
-    public String getTipoPagamento() {
-        return tipoPagamento;
+    public String getMeioPagemento() {
+        return meioPagemento;
     }
 
-    public void setTipoPagamento(String tipoPagamento) {
-        this.tipoPagamento = tipoPagamento;
+    public void setMeioPagemento(String meioPagemento) {
+        this.meioPagemento = meioPagemento;
     }
     
     

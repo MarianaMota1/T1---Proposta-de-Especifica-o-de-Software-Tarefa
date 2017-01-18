@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package psc_aplicacao;
 
 /**
  *
  * @author Mary
  */
-public interface ClienteRepositorio extends Repositorio{
-    public Cliente Abrir(String cpf);
+public interface ProdutoRepositorio extends Repositorio{
     
 }
