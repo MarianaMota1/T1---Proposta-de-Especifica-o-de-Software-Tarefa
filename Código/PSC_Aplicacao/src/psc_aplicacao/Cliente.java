@@ -13,20 +13,36 @@ import java.util.Objects;
  *
  * @author Mary
  */
-public class Cliente {
+public class Cliente implements Entidade{
+    private int codigo;
     private String cpf;
     private String rg;
     private String endereco; 
     private String telefone;
     private String nome;
 
-    public Cliente(String cpf, String rg, String endereco, String telefone, String nome) {
+    public Cliente() {
+    }    
+
+    public Cliente(int codigo, String cpf, String rg, String endereco, String telefone, String nome) {
+        this.codigo = codigo;
         this.cpf = cpf;
         this.rg = rg;
         this.endereco = endereco;
         this.telefone = telefone;
         this.nome = nome;
     }
+
+    @Override
+    public int getCodigo() {
+        return codigo;
+    }
+
+    @Override
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }    
+    
 
     public String getCpf() {
         return cpf;
@@ -81,12 +97,13 @@ public class Cliente {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.cpf);
-        hash = 29 * hash + Objects.hashCode(this.rg);
-        hash = 29 * hash + Objects.hashCode(this.endereco);
-        hash = 29 * hash + Objects.hashCode(this.telefone);
-        hash = 29 * hash + Objects.hashCode(this.nome);
+        int hash = 5;
+        hash = 17 * hash + this.codigo;
+        hash = 17 * hash + Objects.hashCode(this.cpf);
+        hash = 17 * hash + Objects.hashCode(this.rg);
+        hash = 17 * hash + Objects.hashCode(this.endereco);
+        hash = 17 * hash + Objects.hashCode(this.telefone);
+        hash = 17 * hash + Objects.hashCode(this.nome);
         return hash;
     }
 
@@ -102,6 +119,9 @@ public class Cliente {
             return false;
         }
         final Cliente other = (Cliente) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
         if (!Objects.equals(this.cpf, other.cpf)) {
             return false;
         }
@@ -119,13 +139,12 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "cpf=" + cpf + ", rg=" + rg + ", endereco=" + endereco + ", telefone=" + telefone + ", nome=" + nome + '}';
+        return "Cliente{" + "codigo=" + codigo + ", cpf=" + cpf + ", rg=" + rg + ", endereco=" + endereco + ", telefone=" + telefone + ", nome=" + nome + '}';
     }
     
     
 
     
-
 }
 
    

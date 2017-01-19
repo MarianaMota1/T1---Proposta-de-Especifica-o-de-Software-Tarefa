@@ -18,7 +18,7 @@ import java.util.Objects;
  * @author Mary
  */
 public class Venda implements Entidade{
-    private int id;
+    private int codigo;
     private Cliente cliente;
     private Date data;
     private BigDecimal valorTotal;
@@ -51,13 +51,13 @@ public class Venda implements Entidade{
     
 
     @Override
-    public int getId() {
-        return id;
+    public int getCodigo() {
+        return codigo;
     }
 
     @Override
-    public void setId(int id) {
-        this.id = id;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public Cliente getCliente() {
@@ -91,9 +91,10 @@ public class Venda implements Entidade{
     public void setItens(List<VendaItem> itens) {
         this.itens = itens;
     }
+    
 
-    public Venda(int id, Cliente cliente, Date data, BigDecimal valorTotal, List<VendaItem> itens) {
-        this.id = id;
+    public Venda(int codigo, Cliente cliente, Date data, BigDecimal valorTotal, List<VendaItem> itens) {
+        this.codigo = codigo;
         this.cliente = cliente;
         this.data = data;
         this.valorTotal = valorTotal;
@@ -103,7 +104,7 @@ public class Venda implements Entidade{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.id;
+        hash = 53 * hash + this.codigo;
         hash = 53 * hash + Objects.hashCode(this.cliente);
         hash = 53 * hash + Objects.hashCode(this.data);
         hash = 53 * hash + Objects.hashCode(this.valorTotal);
@@ -123,7 +124,7 @@ public class Venda implements Entidade{
             return false;
         }
         final Venda other = (Venda) obj;
-        if (this.id != other.id) {
+        if (this.codigo != other.codigo) {
             return false;
         }
         if (!Objects.equals(this.cliente, other.cliente)) {
@@ -140,7 +141,7 @@ public class Venda implements Entidade{
 
     @Override
     public String toString() {
-        return "Venda{" + "id=" + id + ", cliente=" + cliente + ", data=" + data + ", valorTotal=" + valorTotal + ", itens=" + itens + '}';
+        return "Venda{" + "codigo=" + codigo + ", cliente=" + cliente + ", data=" + data + ", valorTotal=" + valorTotal + ", itens=" + itens + '}';
     }   
     
 }

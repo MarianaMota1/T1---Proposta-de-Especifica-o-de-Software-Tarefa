@@ -16,7 +16,7 @@ import java.util.List;
 public interface Repositorio<T extends Entidade>{
     public boolean Salvar(T obj);
     public boolean Apagar(T obj);
-    public T Abrir(int id);
+    public T Abrir(int codigo);
     public List<T> Buscar(T filtro);
     
 }

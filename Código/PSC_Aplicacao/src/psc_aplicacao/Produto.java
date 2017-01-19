@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author Mary
  */
-public class Produto {
+public class Produto implements Entidade {
     
     private int codigo;
     private String nome;
@@ -23,6 +23,10 @@ public class Produto {
         this.nome = nome;
         this.descricao = descricao;
         this.precoUnitario = precoUnitario;
+    }
+
+    public Produto() {
+        
     }
 
     public int getCodigo() {
@@ -99,7 +103,8 @@ public class Produto {
     public String toString() {
         return "Produto{" + "codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + ", precoUnitario=" + precoUnitario + '}';
     }
-    
+
+ 
     
 
     

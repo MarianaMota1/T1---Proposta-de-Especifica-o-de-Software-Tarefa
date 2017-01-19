@@ -11,8 +11,10 @@ package psc_aplicacao;
  * @author Mary
  */
 public interface Entidade {
-    public int getId();
+    public int getCodigo();    
+    public void setCodigo(int codigo);
     
-    public void setId(int id);
+  
+    
     
 }

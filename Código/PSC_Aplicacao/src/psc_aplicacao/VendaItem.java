@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author Mary
  */
 public class VendaItem implements Entidade{
-    private int id;
+    private int codigo;
     private Venda venda;
     private Produto produto;
     private int quantidade;
@@ -21,21 +21,20 @@ public class VendaItem implements Entidade{
     public VendaItem() {
     }
 
-    public VendaItem(int id, Venda venda, Produto produto, int quantidade) {
-        this.id = id;
+    public VendaItem(int codigo, Venda venda, Produto produto, int quantidade) {
+        this.codigo = codigo;
         this.venda = venda;
         this.produto = produto;
         this.quantidade = quantidade;
     }
 
     @Override
-    public int getId() {
-        return id;
+    public int getCodigo() {
+        return codigo;
     }
 
-    @Override
-    public void setId(int id) {
-        this.id = id;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public Venda getVenda() {
@@ -65,7 +64,7 @@ public class VendaItem implements Entidade{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 43 * hash + this.id;
+        hash = 43 * hash + this.codigo;
         hash = 43 * hash + Objects.hashCode(this.venda);
         hash = 43 * hash + Objects.hashCode(this.produto);
         hash = 43 * hash + this.quantidade;
@@ -84,7 +83,7 @@ public class VendaItem implements Entidade{
             return false;
         }
         final VendaItem other = (VendaItem) obj;
-        if (this.id != other.id) {
+        if (this.codigo != other.codigo) {
             return false;
         }
         if (this.quantidade != other.quantidade) {
@@ -98,7 +97,7 @@ public class VendaItem implements Entidade{
 
     @Override
     public String toString() {
-        return "VendaItem{" + "id=" + id + ", venda=" + venda + ", produto=" + produto + ", quantidade=" + quantidade + '}';
+        return "VendaItem{" + "codigo=" + codigo + ", venda=" + venda + ", produto=" + produto + ", quantidade=" + quantidade + '}';
     }
      
     

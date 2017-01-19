@@ -61,7 +61,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
     @Override
     public boolean Salvar(T obj) {
         try {
-            if (obj.getId() == 0) {
+            if (obj.getCodigo() == 0) {
 
                 PreparedStatement sql = conn.prepareStatement(getConsultaInserir());
 
@@ -77,7 +77,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
                 if (resultado.next()) {
 
-                    obj.setId( resultado.getInt(1) );
+                    obj.setCodigo( resultado.getInt(1) );
                 }
 
             } else {
@@ -106,14 +106,14 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
     @Override
     public boolean Apagar(T obj) {
         try {
-            if (obj.getId() > 0) {
+            if (obj.getCodigo() > 0) {
                 // Objeto não está no BD, inserir
 
                 // Cria a consulta sql
                 PreparedStatement sql = conn.prepareStatement(getConsultaApagar());
 
                 // Passa os parâmetros para a consulta SQL
-                sql.setInt(1, obj.getId());
+                sql.setInt(1, obj.getCodigo());
 
                 // Executa a consulta SQL
                 sql.executeUpdate();
@@ -131,18 +131,18 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
     /**
      *
-     * @param id
+     * @param codigo
      * @return
      */
     @Override
-    public T Abrir(int id) {
+    public T Abrir(int codigo) {
         try {
 
             // Crio a consulta sql
             PreparedStatement sql = conn.prepareStatement(getConsultaAbrir());
 
             // Passo os parâmentros para a consulta sql
-            sql.setInt(1, id);
+            sql.setInt(1, codigo);
 
             // Executo a consulta sql e pego os resultados
             ResultSet resultado = sql.executeQuery();
