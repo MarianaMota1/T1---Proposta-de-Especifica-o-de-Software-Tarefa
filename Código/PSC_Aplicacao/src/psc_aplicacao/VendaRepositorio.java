@@ -9,6 +9,6 @@ package psc_aplicacao;
  *
  * @author Mary
  */
-public interface VendaRepositorio extends Repositorio<Venda>{
-    
+public interface VendaRepositorio extends Repositorio<Venda> {
+
 }

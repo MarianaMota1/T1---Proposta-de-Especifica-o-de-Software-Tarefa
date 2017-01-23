@@ -9,24 +9,26 @@ package psc_aplicacao;
  *
  * @author Mary
  */
-public class ItemNotaFiscal {
-    
-    private int id;
+public class ItemNotaFiscal implements Entidade {
+
+    private int codigo;
     private float valorUnitario;
     private int quantidade;
 
-    public ItemNotaFiscal(int id, float valorUnitario, int quantidade) {
-        this.id = id;
+    public ItemNotaFiscal(int codigo, float valorUnitario, int quantidade) {
+        this.codigo = codigo;
         this.valorUnitario = valorUnitario;
         this.quantidade = quantidade;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public float getValorUnitario() {
@@ -44,7 +46,5 @@ public class ItemNotaFiscal {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-    
-    
-    
+
 }

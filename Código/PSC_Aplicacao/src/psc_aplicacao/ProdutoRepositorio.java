@@ -11,11 +11,9 @@ import static javafx.scene.input.KeyCode.T;
  *
  * @author Mary
  */
-public interface ProdutoRepositorio extends Repositorio<Produto>{
+public interface ProdutoRepositorio extends Repositorio<Produto> {
+
     @Override
     public Produto Abrir(int codigo);
 
-    
-
-    
 }

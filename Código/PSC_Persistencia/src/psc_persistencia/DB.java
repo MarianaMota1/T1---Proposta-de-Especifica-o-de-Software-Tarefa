@@ -14,12 +14,13 @@ import java.sql.SQLException;
  * @author Mary
  */
 public class DB {
-    public static void Iniciar() throws ClassNotFoundException{
-        Class.forName("com.mysql.jdbc.Driver"); 
+
+    public static void Iniciar() throws ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
     }
-    
+
     public static Connection criarConexao() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost/PSC","root","root");
+        return DriverManager.getConnection("jdbc:mysql://localhost/lamendz", "root", "");
     }
-    
+
 }

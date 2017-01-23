@@ -5,13 +5,14 @@
  */
 package psc_aplicacao;
 
-
 /**
  *
  * @author Mary
  */
-public interface ClienteRepositorio extends Repositorio<Cliente>{
+public interface ClienteRepositorio extends Repositorio<Cliente> {
+
     public Cliente Abrir(String cpf);
-    public Cliente Buscar(String filtro); 
-    
+
+    public Cliente Buscar(String filtro);
+
 }

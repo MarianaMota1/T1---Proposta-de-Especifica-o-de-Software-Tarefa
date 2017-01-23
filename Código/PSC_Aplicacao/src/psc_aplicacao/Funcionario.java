@@ -6,21 +6,40 @@
 package psc_aplicacao;
 
 import java.util.Objects;
+
 /**
  *
  * @author Mary
  */
-public class Funcionario {
+public class Funcionario implements Entidade {
+
+    private int codigo;
     private String cpf;
     private String rg;
     private String nome;
     private String funcao;
+    private String senha;
 
-    public Funcionario(String cpf, String rg, String nome, String funcao) {
+    public Funcionario() {
+    }
+
+    public Funcionario(int codigo, String cpf, String rg, String nome, String funcao, String senha) {
+        this.codigo = codigo;
         this.cpf = cpf;
         this.rg = rg;
         this.nome = nome;
         this.funcao = funcao;
+        this.senha = senha;
+    }
+
+    @Override
+    public int getCodigo() {
+        return codigo;
+    }
+
+    @Override
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public String getCpf() {
@@ -28,8 +47,9 @@ public class Funcionario {
     }
 
     public void setCpf(String cpf) throws ErroValidacao {
-        if(cpf.length() > 14)
+        if (cpf.length() > 14) {
             throw new ErroValidacao("O atributo cpf deve ter no máximo 14 caracteres!");
+        }
         this.cpf = cpf.replace("-", "").replace(".", "");
     }
 
@@ -38,9 +58,10 @@ public class Funcionario {
     }
 
     public void setRg(String rg) throws ErroValidacao {
-        if(rg.length() > 12 )
+        if (rg.length() > 12) {
             throw new ErroValidacao("O Atributo rg deve ter no máximo 12 caracteres");
-        this.cpf = cpf.replace(".","").replace("-","");
+        }
+        this.cpf = cpf.replace(".", "").replace("-", "");
     }
 
     public String getNome() {
@@ -48,8 +69,9 @@ public class Funcionario {
     }
 
     public void setNome(String nome) throws ErroValidacao {
-         if(nome.length() > 250)
+        if (nome.length() > 250) {
             throw new ErroValidacao("O atributo nome deve ter no máximo 250 caracteres!");
+        }
         this.nome = nome;
     }
 
@@ -58,9 +80,18 @@ public class Funcionario {
     }
 
     public void setFuncao(String funcao) throws ErroValidacao {
-        if(funcao.length() > 250)
+        if (funcao.length() > 250) {
             throw new ErroValidacao("O atributo função deve ter no máximo 250 caracteres!");
+        }
         this.funcao = funcao;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     @Override
@@ -98,10 +129,5 @@ public class Funcionario {
     public String toString() {
         return "Funcionario{" + "cpf=" + cpf + ", rg=" + rg + ", nome=" + nome + ", funcao=" + funcao + '}';
     }
-    
-    
-    
-          
-    
-    
+
 }

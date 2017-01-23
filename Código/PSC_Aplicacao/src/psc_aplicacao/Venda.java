@@ -4,7 +4,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package psc_aplicacao;
 
 import java.math.BigDecimal;
@@ -17,38 +16,37 @@ import java.util.Objects;
  *
  * @author Mary
  */
-public class Venda implements Entidade{
+public class Venda implements Entidade {
+
     private int codigo;
     private Cliente cliente;
     private Date data;
     private BigDecimal valorTotal;
     private List<VendaItem> itens;
-    
+
     public Venda() {
         itens = new ArrayList<>();
     }
-    
-    public void addItem(VendaItem item){
-        if(!itens.contains(item)) {
+
+    public void addItem(VendaItem item) {
+        if (!itens.contains(item)) {
             itens.add(item);
-            this.valorTotal = this.valorTotal.add( 
-                    item.getProduto().getPrecoUnitario().multiply(  new BigDecimal( item.getQuantidade()  )   )  );
+            this.valorTotal = this.valorTotal.add(
+                    item.getProduto().getPrecoUnitario().multiply(new BigDecimal(item.getQuantidade())));
         }
     }
-    
+
     /**
      *
      * @param item
      */
-    public void removeItem(VendaItem item){
-        if(itens.contains(item)){
+    public void removeItem(VendaItem item) {
+        if (itens.contains(item)) {
             itens.remove(item);
-        this.valorTotal = this.valorTotal.subtract(
-                    item.getProduto().getPrecoUnitario().multiply(  new BigDecimal( item.getQuantidade()  )   )  );
+            this.valorTotal = this.valorTotal.subtract(
+                    item.getProduto().getPrecoUnitario().multiply(new BigDecimal(item.getQuantidade())));
         }
     }
-    
-    
 
     @Override
     public int getCodigo() {
@@ -91,7 +89,6 @@ public class Venda implements Entidade{
     public void setItens(List<VendaItem> itens) {
         this.itens = itens;
     }
-    
 
     public Venda(int codigo, Cliente cliente, Date data, BigDecimal valorTotal, List<VendaItem> itens) {
         this.codigo = codigo;
@@ -142,6 +139,6 @@ public class Venda implements Entidade{
     @Override
     public String toString() {
         return "Venda{" + "codigo=" + codigo + ", cliente=" + cliente + ", data=" + data + ", valorTotal=" + valorTotal + ", itens=" + itens + '}';
-    }   
-    
+    }
+
 }

@@ -9,32 +9,32 @@ package psc_aplicacao;
  *
  * @author Mary
  */
-public class MeioPagamento {
-    
-    private int id;
-    private String meioPagemento;
+public class MeioPagamento implements Entidade {
 
-    public MeioPagamento(int id, String meioPagemento) {
-        this.id = id;
-        this.meioPagemento = meioPagemento;
+    private int codigo;
+    private String meioPagamento;
+
+    public MeioPagamento(int codigo, String meioPagamento) {
+        this.codigo = codigo;
+        this.meioPagamento = meioPagamento;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
-    public String getMeioPagemento() {
-        return meioPagemento;
+    public String getMeioPagamento() {
+        return meioPagamento;
     }
 
-    public void setMeioPagemento(String meioPagemento) {
-        this.meioPagemento = meioPagemento;
+    public void setMeioPagamento(String meioPagamento) {
+        this.meioPagamento = meioPagamento;
     }
-    
-    
-    
+
 }

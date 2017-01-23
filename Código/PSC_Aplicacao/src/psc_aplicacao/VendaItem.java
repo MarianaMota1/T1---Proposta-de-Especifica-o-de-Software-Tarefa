@@ -1,5 +1,3 @@
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,11 +6,13 @@
 package psc_aplicacao;
 
 import java.util.Objects;
+
 /**
  *
  * @author Mary
  */
-public class VendaItem implements Entidade{
+public class VendaItem implements Entidade {
+
     private int codigo;
     private Venda venda;
     private Produto produto;
@@ -99,6 +99,5 @@ public class VendaItem implements Entidade{
     public String toString() {
         return "VendaItem{" + "codigo=" + codigo + ", venda=" + venda + ", produto=" + produto + ", quantidade=" + quantidade + '}';
     }
-     
-    
+
 }

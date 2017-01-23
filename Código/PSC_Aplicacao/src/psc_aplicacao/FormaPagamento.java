@@ -10,21 +10,21 @@ package psc_aplicacao;
  * @author Mary
  */
 public class FormaPagamento {
-    
-    private int id;
+
+    private int codigo;
     private String tipoPagamento;
 
-    public FormaPagamento(int id, String tipoPagamento) {
-        this.id = id;
+    public FormaPagamento(int codigo, String tipoPagamento) {
+        this.codigo = codigo;
         this.tipoPagamento = tipoPagamento;
     }
 
-    public int getId() {
-        return id;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public String getTipoPagamento() {
@@ -34,7 +34,5 @@ public class FormaPagamento {
     public void setTipoPagamento(String tipoPagamento) {
         this.tipoPagamento = tipoPagamento;
     }
-    
-    
-    
+
 }

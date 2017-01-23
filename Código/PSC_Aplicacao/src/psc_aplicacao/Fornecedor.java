@@ -1,5 +1,3 @@
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,13 +11,16 @@ import java.util.Objects;
  *
  * @author Mary
  */
-public class Fornecedor {
+public class Fornecedor implements Entidade {
+
+    private int codigo;
     private String cnpj;
     private String nome;
     private String telefone;
     private String email;
 
-    public Fornecedor(String cnpj, String nome, String telefone, String email) {
+    public Fornecedor(int codigo, String cnpj, String nome, String telefone, String email) {
+        this.codigo = codigo;
         this.cnpj = cnpj;
         this.nome = nome;
         this.telefone = telefone;
@@ -31,9 +32,10 @@ public class Fornecedor {
     }
 
     public void setCnpj(String cnpj) throws ErroValidacao {
-        if(cnpj.length() > 14)
+        if (cnpj.length() > 14) {
             throw new ErroValidacao("O atributo cpf deve ter no máximo 18 caracteres!");
-        this.cnpj = cnpj.replace("-", "").replace(".", "").replace("/","");
+        }
+        this.cnpj = cnpj.replace("-", "").replace(".", "").replace("/", "");
     }
 
     public String getNome() {
@@ -41,8 +43,9 @@ public class Fornecedor {
     }
 
     public void setNome(String nome) throws ErroValidacao {
-       if(nome.length() > 250)
+        if (nome.length() > 250) {
             throw new ErroValidacao("O atributo nome deve ter no máximo 250 caracteres!");
+        }
         this.nome = nome;
     }
 
@@ -61,7 +64,7 @@ public class Fornecedor {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -95,5 +98,15 @@ public class Fornecedor {
         }
         return Objects.equals(this.email, other.email);
     }
-    
+
+    @Override
+    public int getCodigo() {
+        return this.codigo;
+    }
+
+    @Override
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
 }

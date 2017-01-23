@@ -3,26 +3,26 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
-*/
- 
+ */
 package psc_aplicacao;
 
-
 import java.util.Objects;
+
 /**
  *
  * @author Mary
  */
-public class Cliente implements Entidade{
+public class Cliente implements Entidade {
+
     private int codigo;
     private String cpf;
     private String rg;
-    private String endereco; 
+    private String endereco;
     private String telefone;
     private String nome;
 
     public Cliente() {
-    }    
+    }
 
     public Cliente(int codigo, String cpf, String rg, String endereco, String telefone, String nome) {
         this.codigo = codigo;
@@ -33,29 +33,19 @@ public class Cliente implements Entidade{
         this.nome = nome;
     }
 
-    @Override
-    public int getCodigo() {
-        return codigo;
-    }
-
-    @Override
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }    
-    
-
     public String getCpf() {
         return cpf;
     }
-    
+
     public void setCpf(String cpf) throws ErroValidacao {
-        if(cpf.length() > 14)
+        if (cpf.length() > 14) {
             throw new ErroValidacao("O atributo cpf deve ter no máximo 14 caracteres!");
+        }
         this.cpf = cpf.replace("-", "").replace(".", "");
     }
 
     public String getRg() {
-        return rg; 
+        return rg;
     }
 
     /**
@@ -63,14 +53,15 @@ public class Cliente implements Entidade{
      * @param rg
      * @throws ErroValidacao
      */
-    public void setRg(String rg) throws ErroValidacao  {
-        if(rg.length() > 12 )
+    public void setRg(String rg) throws ErroValidacao {
+        if (rg.length() > 12) {
             throw new ErroValidacao("O Atributo rg deve ter no máximo 12 caracteres");
-        this.cpf = cpf.replace(".","").replace("-","");
+        }
+        this.cpf = cpf.replace(".", "").replace("-", "");
     }
 
     public String getEndereco() {
-        return endereco; 
+        return endereco;
     }
 
     public void setEndereco(String endereco) {
@@ -90,8 +81,9 @@ public class Cliente implements Entidade{
     }
 
     public void setNome(String nome) throws ErroValidacao {
-        if(nome.length() > 250)
+        if (nome.length() > 250) {
             throw new ErroValidacao("O atributo nome deve ter no máximo 250 caracteres!");
+        }
         this.nome = nome;
     }
 
@@ -141,10 +133,15 @@ public class Cliente implements Entidade{
     public String toString() {
         return "Cliente{" + "codigo=" + codigo + ", cpf=" + cpf + ", rg=" + rg + ", endereco=" + endereco + ", telefone=" + telefone + ", nome=" + nome + '}';
     }
-    
-    
 
-    
+    @Override
+    public int getCodigo() {
+        return this.codigo;
+    }
+
+    @Override
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
 }
-
-   

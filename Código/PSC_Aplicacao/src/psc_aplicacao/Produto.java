@@ -7,12 +7,13 @@ package psc_aplicacao;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+
 /**
  *
  * @author Mary
  */
 public class Produto implements Entidade {
-    
+
     private int codigo;
     private String nome;
     private String descricao;
@@ -26,7 +27,7 @@ public class Produto implements Entidade {
     }
 
     public Produto() {
-        
+
     }
 
     public int getCodigo() {
@@ -42,8 +43,9 @@ public class Produto implements Entidade {
     }
 
     public void setNome(String nome) throws ErroValidacao {
-        if(nome.length() > 250)
+        if (nome.length() > 250) {
             throw new ErroValidacao("O atributo nome deve ter no máximo 250 caracteres!");
+        }
         this.nome = nome;
     }
 
@@ -52,8 +54,9 @@ public class Produto implements Entidade {
     }
 
     public void setDescricao(String descricao) throws ErroValidacao {
-        if(descricao.length() > 350)
+        if (descricao.length() > 350) {
             throw new ErroValidacao("O atributo descrição deve ter no máximo 350 caracteres!");
+        }
         this.descricao = descricao;
     }
 
@@ -104,11 +107,4 @@ public class Produto implements Entidade {
         return "Produto{" + "codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + ", precoUnitario=" + precoUnitario + '}';
     }
 
- 
-    
-
-    
-
-    
-    
 }

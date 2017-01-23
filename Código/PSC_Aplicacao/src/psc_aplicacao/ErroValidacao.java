@@ -9,11 +9,10 @@ package psc_aplicacao;
  *
  * @author Mary
  */
-class ErroValidacao extends Exception {
-    
+public class ErroValidacao extends Exception {
+
     public ErroValidacao(String message) {
         super(message);
     }
-    
-    
+
 }

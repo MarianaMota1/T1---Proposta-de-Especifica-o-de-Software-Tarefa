@@ -3,19 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package psc_persistencia;
+package psc_apresentacao;
+
+import psc_aplicacao.Funcionario;
+import psc_aplicacao.FuncionarioRepositorio;
 
 /**
  *
  * @author Mary
  */
-public class PSC_Persistencia {
+public class PSC_Apresentacao {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        FuncionarioRepositorio dao = GerenciadorReferencias.getFuncionario();
+        System.out.println("" + dao.Buscar(new Funcionario()).size());
     }
-    
+
 }

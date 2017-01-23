@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package psc_aplicacao;
 
 /**
@@ -11,10 +10,9 @@ package psc_aplicacao;
  * @author Mary
  */
 public interface Entidade {
-    public int getCodigo();    
+
+    public int getCodigo();
+
     public void setCodigo(int codigo);
-    
-  
-    
-    
+
 }

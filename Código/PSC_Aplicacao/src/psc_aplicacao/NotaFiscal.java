@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package psc_aplicacao;
 
 import java.util.Date;
+
 /**
  *
  * @author Mary
  */
-public class NotaFiscal {
-    
-    private int id;
+public class NotaFiscal implements Entidade {
+
+    private int codigo;
     private Date data;
     private float valorTotal;
     private String descricao;
@@ -21,19 +21,21 @@ public class NotaFiscal {
     public NotaFiscal() {
     }
 
-    public NotaFiscal(int id, Date data, float valorTotal, String descricao) {
-        this.id = id;
+    public NotaFiscal(int codigo, Date data, float valorTotal, String descricao) {
+        this.codigo = codigo;
         this.data = data;
         this.valorTotal = valorTotal;
         this.descricao = descricao;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public Date getData() {
@@ -57,12 +59,10 @@ public class NotaFiscal {
     }
 
     public void setDescricao(String descricao) throws ErroValidacao {
-        if(descricao.length() > 100)
+        if (descricao.length() > 100) {
             throw new ErroValidacao("O atributo descrição deve ter no máximo 100 caracteres!");
+        }
         this.descricao = descricao;
     }
-    
-    
-    
-    
+
 }

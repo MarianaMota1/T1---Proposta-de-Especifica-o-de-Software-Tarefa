@@ -20,17 +20,17 @@ import psc_aplicacao.Repositorio;
  * @param <T>
  */
 public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> {
+
     protected Connection conn;
-    
+
     private String consultaAbrir;
     private String consultaApagar;
     private String consultaInserir;
     private String consultaAlterar;
     private String consultaBusca;
     private String consultaUltimoId;
-    
+
     private String where = "";
-    
 
     public DAOGenerico() {
         try {
@@ -44,7 +44,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
             System.out.println(ex);
         }
     }
-    
+
     protected abstract T preencheObjeto(ResultSet resultado);
 
     protected abstract void preencheConsulta(PreparedStatement sql, T obj);
@@ -52,7 +52,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
     protected abstract void preencheFiltros(T filtro);
 
     protected abstract void preencheParametros(PreparedStatement sql, T filtro);
-    
+
     /**
      *
      * @param obj
@@ -77,7 +77,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
                 if (resultado.next()) {
 
-                    obj.setCodigo( resultado.getInt(1) );
+                    obj.setCodigo(resultado.getInt(1));
                 }
 
             } else {
@@ -97,7 +97,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
         }
         return false;
     }
-    
+
     /**
      *
      * @param obj
@@ -163,9 +163,10 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
     @Override
     public List<T> Buscar(T filtro) {
+        
         List<T> ret = new ArrayList<>();
 
-        if(filtro != null){
+        if (filtro != null) {
             preencheFiltros(filtro);
 
             if (where.length() > 0) {
@@ -177,8 +178,9 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
             PreparedStatement sql = conn.prepareStatement(getConsultaBusca() + where);
 
-            if(filtro != null)
+            if (filtro != null) {
                 preencheParametros(sql, filtro);
+            }
 
             ResultSet resultado = sql.executeQuery();
 
@@ -203,9 +205,6 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
         where = where + campo + " " + operador + " ?";
     }
-    
-    
-    
 
     public Connection getConn() {
         return conn;
@@ -270,8 +269,5 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
     public void setWhere(String where) {
         this.where = where;
     }
-    
-    
-    
-        
+
 }
