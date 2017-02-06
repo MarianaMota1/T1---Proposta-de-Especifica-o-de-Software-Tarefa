@@ -7,6 +7,8 @@ package psc_apresentacao;
 
 import psc_aplicacao.Funcionario;
 import psc_aplicacao.FuncionarioRepositorio;
+import psc_apresentacao_desktop.GerenciadorReferencias;
+
 
 /**
  *
