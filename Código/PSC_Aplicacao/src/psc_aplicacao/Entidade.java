@@ -14,5 +14,5 @@ public interface Entidade {
     public int getCodigo();
 
     public void setCodigo(int codigo);
-
+ 
 }
