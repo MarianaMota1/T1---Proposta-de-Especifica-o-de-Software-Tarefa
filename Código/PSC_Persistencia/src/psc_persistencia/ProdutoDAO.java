@@ -26,7 +26,7 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
         setConsultaInserir("insert into produtos(nome,preco) values(?,?)");
         setConsultaAlterar("update produtos set nome = ?, preco = ? where id = ?");
         setConsultaBusca("select id, nome, preco from produtos ");
-        setConsultaUltimoId("select max(codigo) from produtos where nome = ? and preco = ?");
+        setConsultaUltimoCodigo("select max(codigo) from produtos where nome = ? and preco = ?");
     }
 
     /**
