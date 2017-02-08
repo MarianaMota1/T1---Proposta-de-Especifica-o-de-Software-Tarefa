@@ -13,6 +13,5 @@ public interface ClienteRepositorio extends Repositorio<Cliente> {
 
     public Cliente Abrir(String cpf);
 
-    public Cliente Buscar(String filtro);
 
 }

@@ -33,6 +33,16 @@ public class Cliente implements Entidade {
         this.nome = nome;
     }
 
+    public Cliente(int codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
+    }
+
+        
+        
+        
+   
+
     public String getCpf() {
         return cpf;
     }

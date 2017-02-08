@@ -1,5 +1,12 @@
 package psc_apresentacao_desktop;
 
+import java.awt.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import psc_aplicacao.Cliente;
+import psc_aplicacao.ClienteRepositorio;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,14 +17,45 @@ package psc_apresentacao_desktop;
  *
  * @author Mary
  */
-public class ListarCliente extends javax.swing.JInternalFrame {
+public class TelaListarCliente extends javax.swing.JInternalFrame {
+    
+    ClienteRepositorio dao = GerenciadorReferencias.getCliente();
+    
 
     /**
      * Creates new form ListarCliente
      */
-    public ListarCliente() {
+    public TelaListarCliente() {
         initComponents();
+        
+        List<Cliente> busca = dao.Buscar(null);
+        
+        preencheTabela(busca);
     }
+    
+    private void preencheTabela(List<Cliente> lista){
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID");
+        modelo.addColumn("Nome");
+        
+        for(Cliente c : lista){
+            Vector linha = new Vector();
+            linha.add(c.getCodigo());
+            linha.add(c.getNome());
+            modelo.addRow(linha);
+        }
+        
+        tblBusca.setModel(modelo);
+    }
+    
+    public void buscar(String nome){
+        Cliente filtro = new Cliente(0, nome);
+        
+        List<Cliente> busca = dao.Buscar(filtro);
+        
+        preencheTabela(busca);
+        
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,10 +67,10 @@ public class ListarCliente extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtBusca = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblBusca = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -42,15 +80,22 @@ public class ListarCliente extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel1.setText("Nome:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtBusca.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtBuscaActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Buscar");
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblBusca.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        tblBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -66,7 +111,7 @@ public class ListarCliente extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblBusca);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,9 +124,9 @@ public class ListarCliente extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(btnBuscar)
                         .addContainerGap(62, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -90,8 +135,8 @@ public class ListarCliente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -100,16 +145,24 @@ public class ListarCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+       
+    }//GEN-LAST:event_txtBuscaActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        buscar(txtBusca.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+   
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblBusca;
+    private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @author Mary
  * @param <T>
+
  */
 public interface Repositorio<T extends Entidade> {
 
@@ -22,5 +23,4 @@ public interface Repositorio<T extends Entidade> {
     public T Abrir(int codigo);
 
     public List<T> Buscar(T filtro);
-
 }

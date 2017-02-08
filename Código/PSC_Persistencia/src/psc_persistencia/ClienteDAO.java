@@ -27,7 +27,7 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
         setConsultaAlterar("UPDATE clientes SET nome = ?, "
                         + "cpf = ?,cpf = ?,rg = ?,endereco= ? ,telefone = ?"
                         + "WHERE codigo = ?");
-        setConsultaBusca("select codigo,cpf,rg,endereco, telefone, nome ");
+        setConsultaBusca("select codigo,cpf,rg,endereco,telefone,nome from cliente");
         setConsultaUltimoCodigo("select max(codigo) from clientes where nome = ? and cpf = ?");
     }
     
@@ -129,6 +129,6 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
         }
     }
 
-    
-
 }
+    
+    

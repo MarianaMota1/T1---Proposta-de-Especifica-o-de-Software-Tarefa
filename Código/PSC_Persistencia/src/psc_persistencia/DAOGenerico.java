@@ -30,7 +30,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
     private String consultaBusca;
     private String consultaUltimoCodigo;
 
-    private String where = "";
+    String where = "";
 
     public DAOGenerico() {
         try {
@@ -138,19 +138,14 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
     public T Abrir(int codigo) {
         try {
 
-            // Crio a consulta sql
             PreparedStatement sql = conn.prepareStatement(getConsultaAbrir());
 
-            // Passo os parâmentros para a consulta sql
             sql.setInt(1, codigo);
 
-            // Executo a consulta sql e pego os resultados
             ResultSet resultado = sql.executeQuery();
 
-            // Verifica se algum registro foi retornado na consulta
             if (resultado.next()) {
 
-                // Retorna o objeto
                 return preencheObjeto(resultado);
             }
 
