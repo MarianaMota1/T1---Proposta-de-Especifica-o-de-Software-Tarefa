@@ -20,7 +20,7 @@ public class DB {
     }
 
     public static Connection criarConexao() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost/lamendz", "root", "");
+        return DriverManager.getConnection("jdbc:mysql://localhost/loja", "root", "");
     }
 
 }

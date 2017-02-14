@@ -18,17 +18,17 @@ import psc_aplicacao.ErroValidacao;
  *
  * @author Mary
  */
-public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositorio{
+public class ClienteDAO extends  DAOGenerico<Cliente> implements ClienteRepositorio{
     
     public ClienteDAO() {
-        setConsultaAbrir("select codigo,cpf,rg,endereco, telefone, nome from clientes where codigo = ?");
-        setConsultaApagar("DELETE FROM clientes WHERE codgio = ? ");
-        setConsultaInserir("INSERT INTO clientes(nome,cpf) VALUES(?,?,?)");
-        setConsultaAlterar("UPDATE clientes SET nome = ?, "
+        setConsultaAbrir("select codigo,cpf,rg,endereco, telefone, nome from cliente where codigo = ?");
+        setConsultaApagar("DELETE FROM cliente WHERE codigo = ? ");
+        setConsultaInserir("INSERT INTO cliente(nome,cpf) VALUES(?,?,?)");
+        setConsultaAlterar("UPDATE cliente SET nome = ?, "
                         + "cpf = ?,cpf = ?,rg = ?,endereco= ? ,telefone = ?"
                         + "WHERE codigo = ?");
-        setConsultaBusca("select codigo,cpf,rg,endereco,telefone,nome from cliente");
-        setConsultaUltimoCodigo("select max(codigo) from clientes where nome = ? and cpf = ?");
+        setConsultaBusca("select codigo,cpf,rg,endereco,telefone,nome from cliente ");
+        setConsultaUltimoCodigo("select max(codigo) from cliente where nome = ? and cpf = ?");
     }
     
     /**
@@ -41,9 +41,12 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
                 Cliente tmp = new Cliente();
         try {
             tmp.setCodigo(resultado.getInt(1));
-        
-                tmp.setNome(resultado.getString(2));
-                tmp.setCpf(resultado.getString(3));
+            tmp.setCpf(resultado.getString(2));
+            tmp.setRg(resultado.getString(3));
+            tmp.setEndereco(resultado.getString(4));
+            tmp.setTelefone(resultado.getString(5));        
+            tmp.setNome(resultado.getString(6));
+            
          } catch (SQLException | ErroValidacao ex) {     
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -58,10 +61,14 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
     @Override
     protected void preencheConsulta(PreparedStatement sql, Cliente obj) {
         try {
-            sql.setString(1, obj.getNome());
+            sql.setInt(1, obj.getCodigo());
             sql.setString(2, obj.getCpf());
+            sql.setString(3, obj.getRg());
+            sql.setString(4, obj.getEndereco());
+            sql.setString(5, obj.getTelefone());
+            sql.setString(6, obj.getNome());
             
-            if(obj.getCodigo() > 0) sql.setInt(4,obj.getCodigo());
+            if(obj.getCodigo() > 3) sql.setInt(4,obj.getCodigo());
             
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,7 +85,7 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
         try {
             
             PreparedStatement sql = conn.prepareStatement("select codigo,cpf,rg,endereco, telefone, nome "
-                    + "from clientes where cpf = ?");
+                    + "from cliente where cpf = ?");
             
             sql.setString(1, cpf);
             
@@ -128,7 +135,6 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+     
+    
 }
-    
-    

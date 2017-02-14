@@ -1,6 +1,6 @@
 package psc_apresentacao_desktop;
 
-import java.awt.List;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import psc_aplicacao.Cliente;
@@ -20,6 +20,7 @@ import psc_aplicacao.ClienteRepositorio;
 public class TelaListarCliente extends javax.swing.JInternalFrame {
     
     ClienteRepositorio dao = GerenciadorReferencias.getCliente();
+    TelaEditarCliente editar;
     
 
     /**
@@ -28,14 +29,15 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
     public TelaListarCliente() {
         initComponents();
         
-        List<Cliente> busca = dao.Buscar(null);
-        
+        List<Cliente> busca =  dao.Buscar(null);
+         
         preencheTabela(busca);
+        
     }
     
     private void preencheTabela(List<Cliente> lista){
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID");
+        modelo.addColumn("Codigo");
         modelo.addColumn("Nome");
         
         for(Cliente c : lista){
@@ -49,7 +51,7 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
     }
     
     public void buscar(String nome){
-        Cliente filtro = new Cliente(0, nome);
+        Cliente filtro = new Cliente(0, null, null, null, null, nome);
         
         List<Cliente> busca = dao.Buscar(filtro);
         
@@ -71,6 +73,7 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBusca = new javax.swing.JTable();
+        btnVoltar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -100,7 +103,7 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Cliente"
+                "Código", "Nome"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -111,7 +114,19 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblBusca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBuscaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblBusca);
+
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,9 +140,11 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar)
-                        .addContainerGap(62, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVoltar)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +153,8 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
+                    .addComponent(btnBuscar)
+                    .addComponent(btnVoltar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -155,11 +173,39 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
         buscar(txtBusca.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        
+
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void tblBuscaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBuscaMouseClicked
+        editarCliente(0);// TODO add your handling code here:
+    }//GEN-LAST:event_tblBuscaMouseClicked
+
+    public void editarCliente(int codigo){
+        Cliente entidade;
+        
+        if(codigo == 0)
+            entidade = new Cliente(0,"000.000.000-00","00.000.000-00",null,null,null);
+        else
+            entidade = dao.Abrir(codigo);
+        
+        editar = new TelaEditarCliente();
+        editar.setEntidade(entidade);
+        editar.setListagem(this);
+        
+        this.getParent().add(editar);
+        editar.setVisible(true);
+        this.setVisible(false);
+                
+    }
    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBusca;

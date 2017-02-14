@@ -64,8 +64,8 @@ public class Cliente implements Entidade {
      * @throws ErroValidacao
      */
     public void setRg(String rg) throws ErroValidacao {
-        if (rg.length() > 12) {
-            throw new ErroValidacao("O Atributo rg deve ter no máximo 12 caracteres");
+        if (rg.length() > 13) {
+            throw new ErroValidacao("O Atributo rg deve ter no máximo 13 caracteres");
         }
         this.cpf = cpf.replace(".", "").replace("-", "");
     }

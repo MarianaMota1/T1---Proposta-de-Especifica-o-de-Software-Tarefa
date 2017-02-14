@@ -5,6 +5,7 @@
  */
 package psc_aplicacao;
 
+
 /**
  *
  * @author Mary
@@ -12,6 +13,6 @@ package psc_aplicacao;
 public interface ClienteRepositorio extends Repositorio<Cliente> {
 
     public Cliente Abrir(String cpf);
-
-
+       
+    
 }

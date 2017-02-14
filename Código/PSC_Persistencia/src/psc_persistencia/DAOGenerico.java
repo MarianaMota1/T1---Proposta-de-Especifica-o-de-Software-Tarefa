@@ -69,7 +69,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
                 sql.executeUpdate();
 
-                PreparedStatement sql2 = conn.prepareStatement(getConsultaUltimoId());
+                PreparedStatement sql2 = conn.prepareStatement(getConsultaUltimoCodigo());
 
                 preencheConsulta(sql2, obj);
 
@@ -171,7 +171,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
         try {
 
-            PreparedStatement sql = conn.prepareStatement(getConsultaBusca() + where);
+            PreparedStatement sql = conn.prepareStatement(getConsultaBusca() + where );
 
             if (filtro != null) {
                 preencheParametros(sql, filtro);
@@ -245,11 +245,11 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
         return consultaBusca;
     }
 
-    public void setConsultaBusca(String consultaBusca) {
+        public void setConsultaBusca(String consultaBusca) {
         this.consultaBusca = consultaBusca;
     }
 
-    public String getConsultaUltimoId() {
+    public String getConsultaUltimoCodigo() {
         return consultaUltimoCodigo;
     }
 
@@ -257,12 +257,6 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
         this.consultaUltimoCodigo = consultaUltimoCodigo;
     }
 
-    public String getWhere() {
-        return where;
-    }
-
-    public void setWhere(String where) {
-        this.where = where;
-    }
+    
 
 }
