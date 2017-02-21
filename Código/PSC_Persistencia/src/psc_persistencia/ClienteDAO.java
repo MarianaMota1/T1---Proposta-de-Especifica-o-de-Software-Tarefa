@@ -23,9 +23,9 @@ public class ClienteDAO extends  DAOGenerico<Cliente> implements ClienteReposito
     public ClienteDAO() {
         setConsultaAbrir("select codigo,cpf,rg,endereco, telefone, nome from cliente where codigo = ?");
         setConsultaApagar("DELETE FROM cliente WHERE codigo = ? ");
-        setConsultaInserir("INSERT INTO cliente(nome,cpf) VALUES(?,?,?)");
-        setConsultaAlterar("UPDATE cliente SET nome = ?, "
-                        + "cpf = ?,cpf = ?,rg = ?,endereco= ? ,telefone = ?"
+        setConsultaInserir("INSERT INTO cliente(cpf,rg,endereco,telefone, nome) VALUES(?,?,?,?,?)");
+        setConsultaAlterar("UPDATE cliente SET cpf = ?,"
+                        + "rg = ?,endereco = ?,telefone= ? ,nome = ?"
                         + "WHERE codigo = ?");
         setConsultaBusca("select codigo,cpf,rg,endereco,telefone,nome from cliente ");
         setConsultaUltimoCodigo("select max(codigo) from cliente where nome = ? and cpf = ?");
@@ -61,7 +61,7 @@ public class ClienteDAO extends  DAOGenerico<Cliente> implements ClienteReposito
     @Override
     protected void preencheConsulta(PreparedStatement sql, Cliente obj) {
         try {
-            sql.setInt(1, obj.getCodigo());
+            //sql.setInt(1, obj.getCodigo());
             sql.setString(2, obj.getCpf());
             sql.setString(3, obj.getRg());
             sql.setString(4, obj.getEndereco());

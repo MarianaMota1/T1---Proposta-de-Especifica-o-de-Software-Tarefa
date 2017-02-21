@@ -187,7 +187,7 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
         Cliente entidade;
         
         if(codigo == 0)
-            entidade = new Cliente(0,"000.000.000-00","00.000.000-00",null,null,null);
+            entidade = new Cliente(0,null,null,null,null,null);
         else
             entidade = dao.Abrir(codigo);
         
