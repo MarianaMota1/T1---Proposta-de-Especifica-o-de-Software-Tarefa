@@ -12,7 +12,7 @@ package psc_aplicacao;
  */
 public interface ClienteRepositorio extends Repositorio<Cliente> {
 
-    public Cliente Abrir(String cpf);
+    public Cliente Abrir(int codigo);
        
     
 }
