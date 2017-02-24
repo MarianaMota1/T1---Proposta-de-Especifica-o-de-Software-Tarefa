@@ -67,7 +67,7 @@ public class Cliente implements Entidade {
         if (rg.length() > 13) {
             throw new ErroValidacao("O Atributo rg deve ter no máximo 13 caracteres");
         }
-        this.cpf = cpf.replace(".", "").replace("-", "");
+        this.rg = rg.replace(".", "").replace("-", "");
     }
 
     public String getEndereco() {
