@@ -20,6 +20,7 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
 
     ClienteRepositorio dao = GerenciadorReferencias.getCliente();
     TelaEditarCliente editar;
+    TelaNovoCliente novo;
     
 
     /**
@@ -207,6 +208,20 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
         editar.setVisible(true);
         this.setVisible(false);
     }
+    
+    public void novoCliente(){
+        Cliente entidade;
+        
+        entidade = new Cliente(0,null,null,null,null,null);
+        
+        novo = new TelaNovoCliente();
+        novo.setEntidade(entidade);
+        novo.setListagem(this);
+        
+        this.getParent().add(novo);
+        novo.setVisible(true);
+        this.setVisible(false);
+    }
 
     
    
@@ -219,4 +234,6 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblBusca;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
+
+    
 }
