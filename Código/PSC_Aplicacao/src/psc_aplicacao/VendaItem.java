@@ -21,6 +21,12 @@ public class VendaItem implements Entidade {
     public VendaItem() {
     }
 
+    public VendaItem(Venda venda, Produto produto, int quantidade) {
+        this.venda = venda;
+        this.produto = produto;
+        this.quantidade = quantidade;
+    }
+
     public VendaItem(int codigo, Venda venda, Produto produto, int quantidade) {
         this.codigo = codigo;
         this.venda = venda;

@@ -141,7 +141,7 @@ public class Cliente implements Entidade {
 
     @Override
     public String toString() {
-        return "Cliente{" + "codigo=" + codigo + ", cpf=" + cpf + ", rg=" + rg + ", endereco=" + endereco + ", telefone=" + telefone + ", nome=" + nome + '}';
+        return this.nome;
     }
 
     @Override

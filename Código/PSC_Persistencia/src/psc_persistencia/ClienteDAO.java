@@ -69,7 +69,7 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
                 sql.setInt(6, obj.getCodigo());
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("psc_persistencia.ClienteDAO.preencheConsulta()");
         }
     }
 

@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Mary/Documents/TADS/8º%20Período/PSC/Trabalho%20Final%20DSC/Código/PSC_Persistencia/src/psc_persistencia/ClienteDAO.java</file>
-            <file>file:/C:/Users/Mary/Documents/TADS/8º%20Período/PSC/Trabalho%20Final%20DSC/Código/PSC_Persistencia/src/psc_persistencia/ProdutoDAO.java</file>
-            <file>file:/C:/Users/Mary/Documents/TADS/8º%20Período/PSC/Trabalho%20Final%20DSC/Código/PSC_Persistencia/src/psc_persistencia/DAOGenerico.java</file>
-            <file>file:/C:/Users/Mary/Documents/TADS/8º%20Período/PSC/Trabalho%20Final%20DSC/Código/PSC_Persistencia/src/psc_persistencia/FornecedorDAO.java</file>
+            <file>file:/C:/Users/Mary/Documents/TADS/8º%20Período/PSC/PSC/Trabalho-Final-DSC/Código/PSC_Persistencia/src/psc_persistencia/ClienteDAO.java</file>
+            <file>file:/C:/Users/Mary/Documents/TADS/8º%20Período/PSC/PSC/Trabalho-Final-DSC/Código/PSC_Persistencia/src/psc_persistencia/DAOGenerico.java</file>
+            <file>file:/C:/Users/Mary/Documents/TADS/8º%20Período/PSC/PSC/Trabalho-Final-DSC/Código/PSC_Persistencia/src/psc_persistencia/VendaDAO.java</file>
         </group>
     </open-files>
 </project-private>

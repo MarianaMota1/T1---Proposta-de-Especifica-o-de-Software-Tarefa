@@ -73,16 +73,16 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
                 sql.executeUpdate();
 
-//                PreparedStatement sql2 = conn.prepareStatement(getConsultaUltimoCodigo());
-//
-//                preencheConsulta(sql2, obj);
-//
-//                ResultSet resultado = sql2.executeQuery();
-//
-//                if (resultado.next()) {
-//
-//                    obj.setCodigo(resultado.getInt(1));
-//                }
+                PreparedStatement sql2 = conn.prepareStatement(getConsultaUltimoCodigo());;
+
+                preencheConsulta(sql2, obj);
+
+                ResultSet resultado = sql2.executeQuery();
+
+                if (resultado.next()) {
+
+                    obj.setCodigo(resultado.getInt(1));
+                }
 
             } else {
 
@@ -191,7 +191,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(DAOGenerico.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("psc_persistencia.DAOGenerico.Buscar()");
         }
 
         return ret;

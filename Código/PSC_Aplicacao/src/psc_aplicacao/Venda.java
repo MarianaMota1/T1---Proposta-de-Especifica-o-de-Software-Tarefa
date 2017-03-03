@@ -8,7 +8,7 @@ package psc_aplicacao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -90,7 +90,7 @@ public class Venda implements Entidade {
         this.itens = itens;
     }
 
-    public Venda(int codigo, Cliente cliente, Date data, BigDecimal valorTotal, List<VendaItem> itens) {
+    public Venda(int codigo, Cliente cliente, Date data, BigDecimal valorTotal) {
         this.codigo = codigo;
         this.cliente = cliente;
         this.data = data;
