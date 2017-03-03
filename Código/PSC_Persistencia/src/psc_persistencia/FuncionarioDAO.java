@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import psc_aplicacao.Cliente;
+import psc_aplicacao.ClienteRepositorio;
 import psc_aplicacao.ErroValidacao;
 import psc_aplicacao.Funcionario;
 import psc_aplicacao.FuncionarioRepositorio;
@@ -21,30 +23,41 @@ import psc_aplicacao.FuncionarioRepositorio;
 public class FuncionarioDAO extends DAOGenerico<Funcionario> implements FuncionarioRepositorio {
 
     public FuncionarioDAO() {
-        setConsultaAbrir("select codigo, cpf, rg, nome, funcao, senha from funcionario where id = ?");
-        setConsultaApagar("delete from funcionario where id = ?");
-        setConsultaInserir("insert into funcionario(cpf, rg, nome, funcao, senha) values(?,?,?,?,?)");
-        setConsultaAlterar("update funcionario set cpf = ?, rg = ?, nome = ?, funcao = ?, senha = ? where id = ?");
-        setConsultaBusca("select codigo, cpf, rg, nome, funcao, senha from funcionario");
+        setConsultaAbrir("select codigo,cpf,rg,nome,funcao,senha from funcionario where codigo = ?");
+        setConsultaApagar("DELETE FROM funcionario WHERE codigo = ?");
+        setConsultaInserir("INSERT INTO funcionario(cpf,rg,nome,funcao,senha) VALUES(?,?,?,?,?)");
+        setConsultaAlterar("UPDATE funcionario SET cpf = ?,"
+                + "rg = ?,nome = ?,funcao= ? ,senha = ?"
+                + "WHERE codigo = ?");
+        setConsultaBusca("select codigo,cpf,rg,nome,funcao,senha from funcionario ");
+        setConsultaUltimoCodigo("select max(codigo) from funcionario where nome = ? and cpf = ?");
     }
 
+    /**
+     *
+     * @param resultado
+     * @return
+     */
     @Override
     protected Funcionario preencheObjeto(ResultSet resultado) {
+        Funcionario tmp = new Funcionario();
         try {
-            Funcionario tmp = new Funcionario();
             tmp.setCodigo(resultado.getInt(1));
             tmp.setCpf(resultado.getString(2));
             tmp.setRg(resultado.getString(3));
             tmp.setNome(resultado.getString(4));
             tmp.setFuncao(resultado.getString(5));
             tmp.setSenha(resultado.getString(6));
-            return tmp;
         } catch (SQLException | ErroValidacao ex) {
             Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return tmp;
     }
 
+    /**
+     * @param sql
+     * @param obj
+     */
     @Override
     protected void preencheConsulta(PreparedStatement sql, Funcionario obj) {
         try {
@@ -57,32 +70,51 @@ public class FuncionarioDAO extends DAOGenerico<Funcionario> implements Funciona
                 sql.setInt(6, obj.getCodigo());
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     * @param codigo
+     * @return
+     */
+    @Override
+    public Funcionario Abrir(int codigo) {
+        try {
+            PreparedStatement sql = conn.prepareStatement("select codigo,cpf,rg,nome,funcao,senha "
+                    + "from funcionario where codigo = ?");
+
+            sql.setInt(1, codigo);
+            ResultSet resultado = sql.executeQuery();
+            if (resultado.next()) {
+                return preencheObjeto(resultado);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    /**
+     * @param filtro
+     */
     @Override
     protected void preencheFiltros(Funcionario filtro) {
         if (filtro.getCodigo() > 0) {
             adicionarFiltro("codigo", "=");
         }
-        if (filtro.getCpf() != null) {
-            adicionarFiltro("cpf", " like ");
-        }
-        if (filtro.getRg() != null) {
-            adicionarFiltro("rg", " like ");
-        }
         if (filtro.getNome() != null) {
             adicionarFiltro("nome", " like ");
         }
-        if (filtro.getFuncao() != null) {
-            adicionarFiltro("funcao", " like ");
-        }
-        if (filtro.getSenha() != null) {
-            adicionarFiltro("senha", " like ");
+        if (filtro.getCpf() != null) {
+            adicionarFiltro("cpf", "=");
         }
     }
 
+    /**
+     * @param sql
+     * @param filtro
+     */
     @Override
     protected void preencheParametros(PreparedStatement sql, Funcionario filtro) {
         try {
@@ -91,7 +123,16 @@ public class FuncionarioDAO extends DAOGenerico<Funcionario> implements Funciona
                 sql.setInt(cont, filtro.getCodigo());
                 cont++;
             }
-        } catch (Exception ex) {
+            if (filtro.getNome() != null) {
+                sql.setString(cont, filtro.getNome() + "%");
+                cont++;
+            }
+            if (filtro.getCpf() != null) {
+                sql.setString(cont, filtro.getCpf());
+                cont++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import psc_aplicacao.Repositorio;
 
 /**
@@ -41,7 +43,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
         } catch (SQLException ex) {
             System.out.println("Usuário/senha errados!");
         } catch (Exception ex) {
-            System.out.println(ex);
+            Logger.getLogger(DAOGenerico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -62,6 +64,8 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
     public boolean Salvar(T obj) {
         try {
             if (obj.getCodigo() == 0) {
+                
+                System.out.println(getConsultaInserir());
 
                 PreparedStatement sql = conn.prepareStatement(getConsultaInserir());
 
@@ -69,16 +73,16 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
                 sql.executeUpdate();
 
-                PreparedStatement sql2 = conn.prepareStatement(getConsultaUltimoCodigo());
-
-                preencheConsulta(sql2, obj);
-
-                ResultSet resultado = sql2.executeQuery();
-
-                if (resultado.next()) {
-
-                    obj.setCodigo(resultado.getInt(1));
-                }
+//                PreparedStatement sql2 = conn.prepareStatement(getConsultaUltimoCodigo());
+//
+//                preencheConsulta(sql2, obj);
+//
+//                ResultSet resultado = sql2.executeQuery();
+//
+//                if (resultado.next()) {
+//
+//                    obj.setCodigo(resultado.getInt(1));
+//                }
 
             } else {
 
@@ -92,8 +96,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
             return true;
 
         } catch (SQLException e) {
-            System.out.print(e);
-
+            Logger.getLogger(DAOGenerico.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
     }
@@ -123,8 +126,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
             return true;
 
         } catch (SQLException e) {
-            System.out.print(e);
-
+            Logger.getLogger(DAOGenerico.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
     }
@@ -150,7 +152,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
             }
 
         } catch (SQLException ex) {
-            System.out.println(ex);
+            Logger.getLogger(DAOGenerico.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
@@ -158,9 +160,11 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
     @Override
     public List<T> Buscar(T filtro) {
-        
+
         List<T> ret = new ArrayList<>();
 
+        where = "";
+        
         if (filtro != null) {
             preencheFiltros(filtro);
 
@@ -171,14 +175,14 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
 
         try {
 
-            PreparedStatement sql = conn.prepareStatement(getConsultaBusca() + where );
+            PreparedStatement sql = conn.prepareStatement(getConsultaBusca() + where);
 
             if (filtro != null) {
                 preencheParametros(sql, filtro);
             }
 
             ResultSet resultado = sql.executeQuery();
-
+            
             while (resultado.next()) {
 
                 T tmp = preencheObjeto(resultado);
@@ -187,7 +191,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
             }
 
         } catch (SQLException ex) {
-            System.out.println(ex);
+            Logger.getLogger(DAOGenerico.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return ret;
@@ -197,7 +201,6 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
         if (where.length() > 0) {
             where = where + " and ";
         }
-
         where = where + campo + " " + operador + " ?";
     }
 
@@ -245,7 +248,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
         return consultaBusca;
     }
 
-        public void setConsultaBusca(String consultaBusca) {
+    public void setConsultaBusca(String consultaBusca) {
         this.consultaBusca = consultaBusca;
     }
 
@@ -256,7 +259,5 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
     public void setConsultaUltimoCodigo(String consultaUltimoCodigo) {
         this.consultaUltimoCodigo = consultaUltimoCodigo;
     }
-
-    
 
 }

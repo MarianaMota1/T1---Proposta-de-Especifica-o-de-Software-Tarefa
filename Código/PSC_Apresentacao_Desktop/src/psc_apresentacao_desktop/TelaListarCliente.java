@@ -1,67 +1,52 @@
-package psc_apresentacao_desktop;
-
-import java.util.List;
-import java.util.Vector;
-import javax.swing.table.DefaultTableModel;
-import psc_aplicacao.Cliente;
-import psc_aplicacao.ClienteRepositorio;
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package psc_apresentacao_desktop;
+
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import psc_aplicacao.Cliente;
+import psc_aplicacao.ClienteRepositorio;
+
 /**
  *
  * @author Mary
  */
 public class TelaListarCliente extends javax.swing.JInternalFrame {
-
+    
     ClienteRepositorio dao = GerenciadorReferencias.getCliente();
     TelaEditarCliente editar;
-    TelaNovoCliente novo;
-    
 
     /**
-     * Creates new form ListarCliente
+     * Creates new form TelaListarCliente
      */
     public TelaListarCliente() {
         initComponents();
-
-        List<Cliente> busca = dao.Buscar(null);
-
-        preencheTabela(busca);
-
-    }
-
-    public void carregar() {
         List<Cliente> busca = dao.Buscar(null);
         preencheTabela(busca);
     }
-
+    
     private void preencheTabela(List<Cliente> lista) {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codigo");
         modelo.addColumn("Nome");
-
         for (Cliente c : lista) {
             Vector linha = new Vector();
             linha.add(c.getCodigo());
             linha.add(c.getNome());
             modelo.addRow(linha);
         }
-
         tblBusca.setModel(modelo);
     }
-
+    
     public void buscar(String nome) {
         Cliente filtro = new Cliente(0, null, null, null, null, nome);
-
         List<Cliente> busca = dao.Buscar(filtro);
-
         preencheTabela(busca);
-
     }
 
     /**
@@ -83,17 +68,12 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Listagem dos Clientes");
+        setResizable(true);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel1.setText("Nome:");
 
         txtBusca.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        txtBusca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscaActionPerformed(evt);
-            }
-        });
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -137,18 +117,19 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBusca)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNovo)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,21 +140,15 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
                     .addComponent(btnNovo))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtBuscaActionPerformed
-
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
         buscar(txtBusca.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -184,47 +159,25 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblBuscaMouseClicked
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // TODO add your handling code here:
-        TelaNovoCliente tela = new TelaNovoCliente();
-        this.add(tela);
-        tela.setVisible(true);
-        
+        editarCliente(0);
     }//GEN-LAST:event_btnNovoActionPerformed
-
+    
     public void editarCliente(int codigo) {
         Cliente entidade;
-
         if (codigo == 0) {
             entidade = new Cliente(0, null, null, null, null, null);
         } else {
             entidade = dao.Abrir(codigo);
         }
-
+        
         editar = new TelaEditarCliente();
         editar.setEntidade(entidade);
         editar.setListagem(this);
-
+        
         this.getParent().add(editar);
         editar.setVisible(true);
         this.setVisible(false);
     }
-    
-    public void novoCliente(){
-        Cliente entidade;
-        
-        entidade = new Cliente(0,null,null,null,null,null);
-        
-        novo = new TelaNovoCliente();
-        novo.setEntidade(entidade);
-        novo.setListagem(this);
-        
-        this.getParent().add(novo);
-        novo.setVisible(true);
-        this.setVisible(false);
-    }
-
-    
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -235,5 +188,4 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 
-    
 }

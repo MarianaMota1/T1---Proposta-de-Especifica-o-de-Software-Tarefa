@@ -40,7 +40,6 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
     protected Cliente preencheObjeto(ResultSet resultado) {
         Cliente tmp = new Cliente();
         try {
-
             tmp.setCodigo(resultado.getInt(1));
             tmp.setCpf(resultado.getString(2));
             tmp.setRg(resultado.getString(3));
@@ -55,63 +54,51 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
     }
 
     /**
-     *
      * @param sql
      * @param obj
      */
     @Override
     protected void preencheConsulta(PreparedStatement sql, Cliente obj) {
         try {
-//            sql.setInt(1, obj.getCodigo());
             sql.setString(1, obj.getCpf());
             sql.setString(2, obj.getRg());
             sql.setString(3, obj.getEndereco());
             sql.setString(4, obj.getTelefone());
             sql.setString(5, obj.getNome());
-
             if (obj.getCodigo() > 0) {
                 sql.setInt(6, obj.getCodigo());
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
-     *
      * @param codigo
      * @return
      */
     @Override
     public Cliente Abrir(int codigo) {
         try {
-
             PreparedStatement sql = conn.prepareStatement("select codigo,cpf,rg,endereco,telefone,nome "
                     + "from cliente where codigo = ?");
 
             sql.setInt(1, codigo);
-
             ResultSet resultado = sql.executeQuery();
-
             if (resultado.next()) {
-
                 return preencheObjeto(resultado);
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-
         return null;
     }
 
     /**
-     *
      * @param filtro
      */
     @Override
     protected void preencheFiltros(Cliente filtro) {
-
         if (filtro.getCodigo() > 0) {
             adicionarFiltro("codigo", "=");
         }
@@ -124,7 +111,6 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
     }
 
     /**
-     *
      * @param sql
      * @param filtro
      */
@@ -144,7 +130,6 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
                 sql.setString(cont, filtro.getCpf());
                 cont++;
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

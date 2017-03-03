@@ -10,9 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import psc_aplicacao.Cliente;
+import psc_aplicacao.ClienteRepositorio;
 import psc_aplicacao.ErroValidacao;
-import psc_aplicacao.ProdutoRepositorio;
+import psc_aplicacao.Fornecedor;
+import psc_aplicacao.Funcionario;
+import psc_aplicacao.FuncionarioRepositorio;
 import psc_aplicacao.Produto;
+import psc_aplicacao.ProdutoRepositorio;
 
 /**
  *
@@ -21,12 +26,13 @@ import psc_aplicacao.Produto;
 public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositorio {
 
     public ProdutoDAO() {
-        setConsultaAbrir("select id, nome, preco from produtos where id = ?");
-        setConsultaApagar("delete from produtos where id = ?");
-        setConsultaInserir("insert into produtos(nome,preco) values(?,?)");
-        setConsultaAlterar("update produtos set nome = ?, preco = ? where id = ?");
-        setConsultaBusca("select id, nome, preco from produtos ");
-        setConsultaUltimoCodigo("select max(codigo) from produtos where nome = ? and preco = ?");
+        setConsultaAbrir("select codigo,nome,descricao,precounitario from produto where codigo = ?");
+        setConsultaApagar("DELETE FROM produto WHERE codigo = ?");
+        setConsultaInserir("INSERT INTO produto(nome,descricao,precounitario) VALUES(?,?,?)");
+        setConsultaAlterar("UPDATE produto SET nome = ?, "
+                + "descricao = ?, precounitario = ? WHERE codigo = ?");
+        setConsultaBusca("select codigo,nome,descricao,precounitario from produto ");
+        setConsultaUltimoCodigo("select max(codigo) from produto where nome = ?");
     }
 
     /**
@@ -36,24 +42,19 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
      */
     @Override
     protected Produto preencheObjeto(ResultSet resultado) {
+        Produto tmp = new Produto();
         try {
-            Produto tmp = new Produto();
             tmp.setCodigo(resultado.getInt(1));
-            try {
-                tmp.setNome(resultado.getString(2));
-            } catch (ErroValidacao ex) {
-                Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            tmp.setPrecoUnitario(resultado.getBigDecimal(3));
-            return tmp;
-        } catch (SQLException ex) {
+            tmp.setNome(resultado.getString(2));
+            tmp.setDescricao(resultado.getString(3));
+            tmp.setPrecoUnitario(resultado.getBigDecimal(4));
+        } catch (SQLException | ErroValidacao ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return tmp;
     }
 
     /**
-     *
      * @param sql
      * @param obj
      */
@@ -61,9 +62,10 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
     protected void preencheConsulta(PreparedStatement sql, Produto obj) {
         try {
             sql.setString(1, obj.getNome());
-            sql.setBigDecimal(2, obj.getPrecoUnitario());
+            sql.setString(2, obj.getDescricao());
+            sql.setBigDecimal(3, obj.getPrecoUnitario());
             if (obj.getCodigo() > 0) {
-                sql.setInt(3, obj.getCodigo());
+                sql.setInt(4, obj.getCodigo());
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,24 +73,40 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
     }
 
     /**
-     *
+     * @param codigo
+     * @return
+     */
+    @Override
+    public Produto Abrir(int codigo) {
+        try {
+            PreparedStatement sql = conn.prepareStatement("select codigo,nome,descricao,precounitario "
+                    + "from produto where codigo = ?");
+
+            sql.setInt(1, codigo);
+            ResultSet resultado = sql.executeQuery();
+            if (resultado.next()) {
+                return preencheObjeto(resultado);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    /**
      * @param filtro
      */
     @Override
     protected void preencheFiltros(Produto filtro) {
         if (filtro.getCodigo() > 0) {
-            adicionarFiltro("Codigo", "=");
+            adicionarFiltro("codigo", "=");
         }
         if (filtro.getNome() != null) {
             adicionarFiltro("nome", " like ");
         }
-        if (filtro.getPrecoUnitario() != null) {
-            adicionarFiltro("preco", " = ");
-        }
     }
 
     /**
-     *
      * @param sql
      * @param filtro
      */
@@ -101,14 +119,11 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
                 cont++;
             }
             if (filtro.getNome() != null) {
-                sql.setString(cont, filtro.getNome());
+                sql.setString(cont, filtro.getNome() + "%");
                 cont++;
             }
-            if (filtro.getPrecoUnitario() != null) {
-                sql.setBigDecimal(cont, filtro.getPrecoUnitario());
-                cont++;
-            }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

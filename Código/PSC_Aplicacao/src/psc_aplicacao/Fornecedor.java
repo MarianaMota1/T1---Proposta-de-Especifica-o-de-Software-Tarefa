@@ -19,6 +19,9 @@ public class Fornecedor implements Entidade {
     private String telefone;
     private String email;
 
+    public Fornecedor() {
+    }
+
     public Fornecedor(int codigo, String cnpj, String nome, String telefone, String email) {
         this.codigo = codigo;
         this.cnpj = cnpj;
