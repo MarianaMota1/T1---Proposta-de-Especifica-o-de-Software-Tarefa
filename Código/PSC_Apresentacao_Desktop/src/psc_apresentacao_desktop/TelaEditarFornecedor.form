@@ -34,7 +34,9 @@
                       <Component id="txtNome" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Component id="btnNovo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnApagar" min="-2" max="-2" attributes="0"/>
@@ -86,11 +88,14 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="btnSalvar" alignment="3" max="32767" attributes="0"/>
+                      <Component id="btnNovo" alignment="3" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="btnListar" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnApagar" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnSalvar" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnListar" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -159,6 +164,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Telefone"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnNovo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Novo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

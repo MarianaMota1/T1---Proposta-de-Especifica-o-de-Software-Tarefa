@@ -8,14 +8,7 @@ package psc_apresentacao_desktop;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import psc_aplicacao.Cliente;
-import psc_aplicacao.ClienteRepositorio;
-import psc_aplicacao.Fornecedor;
-import psc_aplicacao.FornecedorRepositorio;
-import psc_aplicacao.Funcionario;
-import psc_aplicacao.FuncionarioRepositorio;
 import psc_aplicacao.Produto;
 import psc_aplicacao.ProdutoRepositorio;
 
@@ -37,6 +30,10 @@ public class TelaListarProduto extends javax.swing.JInternalFrame {
         preencheTabela(busca);
     }
 
+    public void carregar() {
+        buscar(txtBusca.getText());
+    }
+
     private void preencheTabela(List<Produto> lista) {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codigo");
@@ -51,7 +48,7 @@ public class TelaListarProduto extends javax.swing.JInternalFrame {
     }
 
     public void buscar(String nome) {
-        Produto filtro = new Produto(0, nome, null, new BigDecimal(0));
+        Produto filtro = new Produto(0, nome, null, null);
         List<Produto> busca = dao.Buscar(filtro);
         preencheTabela(busca);
     }

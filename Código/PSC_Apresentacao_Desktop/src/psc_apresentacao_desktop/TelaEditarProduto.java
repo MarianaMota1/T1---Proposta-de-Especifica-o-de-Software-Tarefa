@@ -53,6 +53,7 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
         lblNome1 = new javax.swing.JLabel();
         txtPreco = new javax.swing.JTextField();
         lblNome2 = new javax.swing.JLabel();
+        btnNovo = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -89,6 +90,13 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
         lblNome2.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         lblNome2.setText("Preço:");
 
+        btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,7 +114,9 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
                     .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(111, Short.MAX_VALUE)
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addComponent(btnNovo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnApagar)
@@ -130,11 +140,12 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
                     .addComponent(lblNome2)
                     .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnApagar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(btnApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnListar))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,6 +156,7 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
             if (JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja salvar as alterações?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
                 preencheObjeto();
                 if (dao.Salvar(entidade)) {
+                    btnApagar.setVisible(true);
                     JOptionPane.showMessageDialog(rootPane, "Operação concluída com sucesso!");
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Ocorreu um erro!");
@@ -158,16 +170,17 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        listagem.carregar();
         listagem.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
-        // TODO add your handling code here:
         if (JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja apagar o Cliente?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
             if (dao.Apagar(entidade)) {
                 JOptionPane.showMessageDialog(rootPane, "Operação concluída com sucesso!");
                 entidade = new Produto(0, null, null, new BigDecimal(0));
+                btnApagar.setVisible(false);
                 preencheCampos();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Ocorreu um erro!");
@@ -178,10 +191,17 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnApagarActionPerformed
 
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        entidade = new Produto(0, null, null, new BigDecimal(0));
+        btnApagar.setVisible(false);
+        preencheCampos();
+    }//GEN-LAST:event_btnNovoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnListar;
+    private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNome1;

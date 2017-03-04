@@ -23,13 +23,14 @@ import psc_aplicacao.FornecedorRepositorio;
 public class FornecedorDAO extends DAOGenerico<Fornecedor> implements FornecedorRepositorio {
 
     public FornecedorDAO() {
-        setConsultaAbrir("select codigo,cnpj,nome,telefone,email from fornecedor where codigo = ?");
+        setConsultaAbrir("select codigo,nome,cnpj,telefone,email from fornecedor where codigo = ?");
         setConsultaApagar("DELETE FROM fornecedor WHERE codigo = ? ");
-        setConsultaInserir("INSERT INTO fornecedor(cnpj,nome,telefone,email) VALUES(?,?,?,?)");
-        setConsultaAlterar("UPDATE fornecedor SET cnpj = ?,"
-                + "nome = ?, telefone = ?, email= ? WHERE codigo = ?");
-        setConsultaBusca("select codigo,cnpj,nome,telefone,email from fornecedor ");
-        setConsultaUltimoCodigo("select max(codigo) from fornecedor where nome = ? and cnpj = ?");
+        setConsultaInserir("INSERT INTO fornecedor(nome,cnpj,telefone,email) VALUES(?,?,?,?)");
+        setConsultaAlterar("UPDATE fornecedor SET nome = ?, cnpj = ?, "
+                + "telefone = ?, email= ? WHERE codigo = ?");
+        setConsultaBusca("select codigo,nome,cnpj,telefone,email from fornecedor ");
+        setConsultaUltimoCodigo("select max(codigo) from fornecedor where nome = ? and cnpj = ? and "
+                + "telefone = ? and email = ?");
     }
 
     /**
@@ -42,8 +43,8 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
         Fornecedor tmp = new Fornecedor();
         try {
             tmp.setCodigo(resultado.getInt(1));
-            tmp.setCnpj(resultado.getString(2));
-            tmp.setNome(resultado.getString(3));
+            tmp.setNome(resultado.getString(2));
+            tmp.setCnpj(resultado.getString(3));
             tmp.setTelefone(resultado.getString(4));
             tmp.setEmail(resultado.getString(5));
         } catch (SQLException | ErroValidacao ex) {
@@ -59,8 +60,8 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
     @Override
     protected void preencheConsulta(PreparedStatement sql, Fornecedor obj) {
         try {
-            sql.setString(1, obj.getCnpj());
-            sql.setString(2, obj.getNome());
+            sql.setString(1, obj.getNome());
+            sql.setString(2, obj.getCnpj());
             sql.setString(3, obj.getTelefone());
             sql.setString(4, obj.getEmail());
             if (obj.getCodigo() > 0) {
@@ -78,7 +79,7 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
     @Override
     public Fornecedor Abrir(int codigo) {
         try {
-            PreparedStatement sql = conn.prepareStatement("select codigo,cnpj,nome,telefone,email "
+            PreparedStatement sql = conn.prepareStatement("select codigo,nome,cnpj,telefone,email "
                     + "from fornecedor where codigo = ?");
 
             sql.setInt(1, codigo);
@@ -106,6 +107,12 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
         if (filtro.getCnpj() != null) {
             adicionarFiltro("cnpj", "=");
         }
+        if (filtro.getTelefone() != null) {
+            adicionarFiltro("telefone", "=");
+        }
+        if (filtro.getEmail() != null) {
+            adicionarFiltro("email", "=");
+        }
     }
 
     /**
@@ -126,6 +133,14 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
             }
             if (filtro.getCnpj() != null) {
                 sql.setString(cont, filtro.getCnpj());
+                cont++;
+            }
+            if (filtro.getTelefone() != null) {
+                sql.setString(cont, filtro.getTelefone());
+                cont++;
+            }
+            if (filtro.getEmail() != null) {
+                sql.setString(cont, filtro.getEmail());
                 cont++;
             }
         } catch (SQLException ex) {

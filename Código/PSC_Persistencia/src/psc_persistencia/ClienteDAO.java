@@ -21,14 +21,15 @@ import psc_aplicacao.ErroValidacao;
 public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositorio {
 
     public ClienteDAO() {
-        setConsultaAbrir("select codigo,cpf,rg,endereco, telefone, nome from cliente where codigo = ?");
+        setConsultaAbrir("select codigo,nome,cpf,rg,endereco,telefone from cliente where codigo = ?");
         setConsultaApagar("DELETE FROM cliente WHERE codigo = ? ");
-        setConsultaInserir("INSERT INTO cliente(cpf,rg,endereco,telefone, nome) VALUES(?,?,?,?,?)");
-        setConsultaAlterar("UPDATE cliente SET cpf = ?,"
-                + "rg = ?,endereco = ?,telefone= ? ,nome = ?"
+        setConsultaInserir("INSERT INTO cliente(nome,cpf,rg,endereco,telefone) VALUES(?,?,?,?,?)");
+        setConsultaAlterar("UPDATE cliente SET nome = ?, "
+                + "cpf = ?, rg = ?,endereco = ?,telefone= ? "
                 + "WHERE codigo = ?");
-        setConsultaBusca("select codigo,cpf,rg,endereco,telefone,nome from cliente ");
-        setConsultaUltimoCodigo("select max(codigo) from cliente where nome = ? and cpf = ?");
+        setConsultaBusca("select codigo,nome,cpf,rg,endereco,telefone from cliente ");
+        setConsultaUltimoCodigo("select max(codigo) from cliente where nome = ? and cpf = ? and rg = ? "
+                + "and endereco = ? and telefone = ?");
     }
 
     /**
@@ -41,12 +42,11 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
         Cliente tmp = new Cliente();
         try {
             tmp.setCodigo(resultado.getInt(1));
-            tmp.setCpf(resultado.getString(2));
-            tmp.setRg(resultado.getString(3));
-            tmp.setEndereco(resultado.getString(4));
-            tmp.setTelefone(resultado.getString(5));
-            tmp.setNome(resultado.getString(6));
-
+            tmp.setNome(resultado.getString(2));
+            tmp.setCpf(resultado.getString(3));
+            tmp.setRg(resultado.getString(4));
+            tmp.setEndereco(resultado.getString(5));
+            tmp.setTelefone(resultado.getString(6));
         } catch (SQLException | ErroValidacao ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,15 +60,16 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
     @Override
     protected void preencheConsulta(PreparedStatement sql, Cliente obj) {
         try {
-            sql.setString(1, obj.getCpf());
-            sql.setString(2, obj.getRg());
-            sql.setString(3, obj.getEndereco());
-            sql.setString(4, obj.getTelefone());
-            sql.setString(5, obj.getNome());
+            sql.setString(1, obj.getNome());
+            sql.setString(2, obj.getCpf());
+            sql.setString(3, obj.getRg());
+            sql.setString(4, obj.getEndereco());
+            sql.setString(5, obj.getTelefone());
             if (obj.getCodigo() > 0) {
                 sql.setInt(6, obj.getCodigo());
             }
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
             System.out.println("psc_persistencia.ClienteDAO.preencheConsulta()");
         }
     }
@@ -80,7 +81,7 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
     @Override
     public Cliente Abrir(int codigo) {
         try {
-            PreparedStatement sql = conn.prepareStatement("select codigo,cpf,rg,endereco,telefone,nome "
+            PreparedStatement sql = conn.prepareStatement("select codigo,nome,cpf,rg,endereco,telefone "
                     + "from cliente where codigo = ?");
 
             sql.setInt(1, codigo);
@@ -108,6 +109,15 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
         if (filtro.getCpf() != null) {
             adicionarFiltro("cpf", "=");
         }
+        if (filtro.getRg() != null) {
+            adicionarFiltro("rg", "=");
+        }
+        if (filtro.getEndereco() != null) {
+            adicionarFiltro("endereco", "=");
+        }
+        if (filtro.getTelefone() != null) {
+            adicionarFiltro("telefone", "=");
+        }
     }
 
     /**
@@ -128,6 +138,18 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
             }
             if (filtro.getCpf() != null) {
                 sql.setString(cont, filtro.getCpf());
+                cont++;
+            }
+            if (filtro.getRg() != null) {
+                sql.setString(cont, filtro.getRg());
+                cont++;
+            }
+            if (filtro.getEndereco() != null) {
+                sql.setString(cont, filtro.getEndereco());
+                cont++;
+            }
+            if (filtro.getTelefone() != null) {
+                sql.setString(cont, filtro.getTelefone());
                 cont++;
             }
         } catch (SQLException ex) {

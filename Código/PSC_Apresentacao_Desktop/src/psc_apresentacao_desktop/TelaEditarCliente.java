@@ -50,6 +50,7 @@ public class TelaEditarCliente extends javax.swing.JInternalFrame {
         txtRg = new javax.swing.JFormattedTextField();
         txtCpf = new javax.swing.JFormattedTextField();
         btnApagar = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -104,6 +105,13 @@ public class TelaEditarCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,14 +138,15 @@ public class TelaEditarCliente extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(lblEndereco)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnApagar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnListar))
-                            .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnNovo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnApagar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnListar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -165,10 +174,12 @@ public class TelaEditarCliente extends javax.swing.JInternalFrame {
                     .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnApagar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnListar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnApagar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnListar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,6 +190,7 @@ public class TelaEditarCliente extends javax.swing.JInternalFrame {
             if (JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja salvar as alterações?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
                 preencheObjeto();
                 if (dao.Salvar(entidade)) {
+                    btnApagar.setVisible(true);
                     JOptionPane.showMessageDialog(rootPane, "Operação concluída com sucesso!");
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Ocorreu um erro!");
@@ -192,30 +204,37 @@ public class TelaEditarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        listagem.carregar();
         listagem.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
-        // TODO add your handling code here:
         if (JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja apagar o Cliente?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
             if (dao.Apagar(entidade)) {
                 JOptionPane.showMessageDialog(rootPane, "Operação concluída com sucesso!");
                 entidade = new Cliente(0, null, null, null, null, null);
+                btnApagar.setVisible(false);
                 preencheCampos();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Ocorreu um erro!");
             }
-
         } else {
             JOptionPane.showMessageDialog(rootPane, "Operação Cancelada!");
         }
     }//GEN-LAST:event_btnApagarActionPerformed
 
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        entidade = new Cliente(0, null, null, null, null, null);
+        btnApagar.setVisible(false);
+        preencheCampos();
+    }//GEN-LAST:event_btnNovoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnListar;
+    private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblEndereco;
@@ -235,7 +254,7 @@ public class TelaEditarCliente extends javax.swing.JInternalFrame {
 
     public void setEntidade(Cliente entidade) {
         this.entidade = entidade;
-        if(entidade.getCodigo() == 0){
+        if (entidade.getCodigo() == 0) {
             btnApagar.setVisible(false);
         }
         preencheCampos();

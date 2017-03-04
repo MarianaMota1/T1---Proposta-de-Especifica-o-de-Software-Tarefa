@@ -6,13 +6,9 @@
 package psc_apresentacao_desktop;
 
 import javax.swing.JOptionPane;
-import psc_aplicacao.Cliente;
-import psc_aplicacao.ClienteRepositorio;
 import psc_aplicacao.ErroValidacao;
 import psc_aplicacao.Fornecedor;
 import psc_aplicacao.FornecedorRepositorio;
-import psc_aplicacao.Funcionario;
-import psc_aplicacao.FuncionarioRepositorio;
 
 /**
  *
@@ -52,6 +48,7 @@ public class TelaEditarFornecedor extends javax.swing.JInternalFrame {
         lblNome2 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
         lblNome3 = new javax.swing.JLabel();
+        btnNovo = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -91,6 +88,13 @@ public class TelaEditarFornecedor extends javax.swing.JInternalFrame {
         lblNome3.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         lblNome3.setText("Telefone");
 
+        btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,7 +107,9 @@ public class TelaEditarFornecedor extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNome))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
+                        .addGap(8, 8, 8)
+                        .addComponent(btnNovo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnApagar)
@@ -144,10 +150,12 @@ public class TelaEditarFornecedor extends javax.swing.JInternalFrame {
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnApagar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnListar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnApagar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -158,6 +166,7 @@ public class TelaEditarFornecedor extends javax.swing.JInternalFrame {
             if (JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja salvar as alterações?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
                 preencheObjeto();
                 if (dao.Salvar(entidade)) {
+                    btnApagar.setVisible(true);
                     JOptionPane.showMessageDialog(rootPane, "Operação concluída com sucesso!");
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Ocorreu um erro!");
@@ -171,6 +180,7 @@ public class TelaEditarFornecedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        listagem.carregar();
         listagem.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnListarActionPerformed
@@ -181,6 +191,7 @@ public class TelaEditarFornecedor extends javax.swing.JInternalFrame {
             if (dao.Apagar(entidade)) {
                 JOptionPane.showMessageDialog(rootPane, "Operação concluída com sucesso!");
                 entidade = new Fornecedor(0, null, null, null, null);
+                btnApagar.setVisible(false);
                 preencheCampos();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Ocorreu um erro!");
@@ -191,10 +202,17 @@ public class TelaEditarFornecedor extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnApagarActionPerformed
 
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        entidade = new Fornecedor(0, null, null, null, null);
+        btnApagar.setVisible(false);
+        preencheCampos();
+    }//GEN-LAST:event_btnNovoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnListar;
+    private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNome1;

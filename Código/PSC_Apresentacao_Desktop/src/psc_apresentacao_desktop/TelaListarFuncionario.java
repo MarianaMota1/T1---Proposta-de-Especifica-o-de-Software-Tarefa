@@ -7,10 +7,7 @@ package psc_apresentacao_desktop;
 
 import java.util.List;
 import java.util.Vector;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import psc_aplicacao.Cliente;
-import psc_aplicacao.ClienteRepositorio;
 import psc_aplicacao.Funcionario;
 import psc_aplicacao.FuncionarioRepositorio;
 
@@ -19,7 +16,7 @@ import psc_aplicacao.FuncionarioRepositorio;
  * @author Mary
  */
 public class TelaListarFuncionario extends javax.swing.JInternalFrame {
-
+    
     FuncionarioRepositorio dao = GerenciadorReferencias.getFuncionario();
     TelaEditarFuncionario editar;
 
@@ -31,7 +28,11 @@ public class TelaListarFuncionario extends javax.swing.JInternalFrame {
         List<Funcionario> busca = dao.Buscar(null);
         preencheTabela(busca);
     }
-
+    
+    public void carregar() {
+        buscar(txtBusca.getText());
+    }
+    
     private void preencheTabela(List<Funcionario> lista) {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codigo");
@@ -44,7 +45,7 @@ public class TelaListarFuncionario extends javax.swing.JInternalFrame {
         }
         tblBusca.setModel(modelo);
     }
-
+    
     public void buscar(String nome) {
         Funcionario filtro = new Funcionario(0, null, null, nome, null, null);
         List<Funcionario> busca = dao.Buscar(filtro);
@@ -163,7 +164,7 @@ public class TelaListarFuncionario extends javax.swing.JInternalFrame {
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         editarFuncionario(0);
     }//GEN-LAST:event_btnNovoActionPerformed
-
+    
     public void editarFuncionario(int codigo) {
         Funcionario entidade;
         if (codigo == 0) {
@@ -171,11 +172,11 @@ public class TelaListarFuncionario extends javax.swing.JInternalFrame {
         } else {
             entidade = dao.Abrir(codigo);
         }
-
+        
         editar = new TelaEditarFuncionario();
         editar.setEntidade(entidade);
         editar.setListagem(this);
-
+        
         this.getParent().add(editar);
         editar.setVisible(true);
         this.setVisible(false);

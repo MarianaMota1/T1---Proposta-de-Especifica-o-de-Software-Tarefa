@@ -17,7 +17,7 @@ import psc_aplicacao.ClienteRepositorio;
  * @author Mary
  */
 public class TelaListarCliente extends javax.swing.JInternalFrame {
-    
+
     ClienteRepositorio dao = GerenciadorReferencias.getCliente();
     TelaEditarCliente editar;
 
@@ -29,7 +29,11 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
         List<Cliente> busca = dao.Buscar(null);
         preencheTabela(busca);
     }
-    
+
+    public void carregar() {
+        buscar(txtBusca.getText());
+    }
+
     private void preencheTabela(List<Cliente> lista) {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codigo");
@@ -42,7 +46,7 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
         }
         tblBusca.setModel(modelo);
     }
-    
+
     public void buscar(String nome) {
         Cliente filtro = new Cliente(0, null, null, null, null, nome);
         List<Cliente> busca = dao.Buscar(filtro);
@@ -161,7 +165,7 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         editarCliente(0);
     }//GEN-LAST:event_btnNovoActionPerformed
-    
+
     public void editarCliente(int codigo) {
         Cliente entidade;
         if (codigo == 0) {
@@ -169,11 +173,11 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
         } else {
             entidade = dao.Abrir(codigo);
         }
-        
+
         editar = new TelaEditarCliente();
         editar.setEntidade(entidade);
         editar.setListagem(this);
-        
+
         this.getParent().add(editar);
         editar.setVisible(true);
         this.setVisible(false);

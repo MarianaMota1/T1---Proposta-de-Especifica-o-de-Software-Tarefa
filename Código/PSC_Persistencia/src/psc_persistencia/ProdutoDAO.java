@@ -10,12 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import psc_aplicacao.Cliente;
-import psc_aplicacao.ClienteRepositorio;
 import psc_aplicacao.ErroValidacao;
-import psc_aplicacao.Fornecedor;
-import psc_aplicacao.Funcionario;
-import psc_aplicacao.FuncionarioRepositorio;
 import psc_aplicacao.Produto;
 import psc_aplicacao.ProdutoRepositorio;
 
@@ -32,7 +27,7 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
         setConsultaAlterar("UPDATE produto SET nome = ?, "
                 + "descricao = ?, precounitario = ? WHERE codigo = ?");
         setConsultaBusca("select codigo,nome,descricao,precounitario from produto ");
-        setConsultaUltimoCodigo("select max(codigo) from produto where nome = ?");
+        setConsultaUltimoCodigo("select max(codigo) from produto where nome = ? and descricao = ? and precounitario = ?");
     }
 
     /**
@@ -104,6 +99,12 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
         if (filtro.getNome() != null) {
             adicionarFiltro("nome", " like ");
         }
+        if (filtro.getDescricao()!= null) {
+            adicionarFiltro("descricao", "=");
+        }
+        if (filtro.getPrecoUnitario()!= null) {
+            adicionarFiltro("precounitario", "=");
+        }
     }
 
     /**
@@ -120,6 +121,14 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
             }
             if (filtro.getNome() != null) {
                 sql.setString(cont, filtro.getNome() + "%");
+                cont++;
+            }
+            if (filtro.getDescricao()!= null) {
+                sql.setString(cont, filtro.getDescricao());
+                cont++;
+            }
+            if (filtro.getPrecoUnitario()!= null) {
+                sql.setBigDecimal(cont, filtro.getPrecoUnitario());
                 cont++;
             }
         } catch (SQLException ex) {

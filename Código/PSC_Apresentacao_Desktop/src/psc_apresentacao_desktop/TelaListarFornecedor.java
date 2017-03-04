@@ -7,14 +7,9 @@ package psc_apresentacao_desktop;
 
 import java.util.List;
 import java.util.Vector;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import psc_aplicacao.Cliente;
-import psc_aplicacao.ClienteRepositorio;
 import psc_aplicacao.Fornecedor;
 import psc_aplicacao.FornecedorRepositorio;
-import psc_aplicacao.Funcionario;
-import psc_aplicacao.FuncionarioRepositorio;
 
 /**
  *
@@ -32,6 +27,10 @@ public class TelaListarFornecedor extends javax.swing.JInternalFrame {
         initComponents();
         List<Fornecedor> busca = dao.Buscar(null);
         preencheTabela(busca);
+    }
+
+    public void carregar() {
+        buscar(txtBusca.getText());
     }
 
     private void preencheTabela(List<Fornecedor> lista) {

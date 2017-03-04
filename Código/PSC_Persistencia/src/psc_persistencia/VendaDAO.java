@@ -9,6 +9,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import psc_aplicacao.Cliente;
@@ -27,6 +29,7 @@ import psc_aplicacao.VendaRepositorio;
 public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
 
     private ClienteDAO clienteDAO;
+    private ProdutoDAO produtoDAO;
 
     public VendaDAO() {
         setConsultaAbrir("select codigo,cliente,data,valortotal from venda where codigo = ?");
@@ -35,7 +38,9 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
         setConsultaAlterar("UPDATE venda SET cliente = ?,"
                 + "data = ?, valortotal = ? WHERE codigo = ?");
         setConsultaBusca("select codigo,cliente,data,valortotal from venda ");
-        setConsultaUltimoCodigo("select max(codigo) from venda where cliente = ?");
+        setConsultaUltimoCodigo("select max(codigo) from venda where cliente = ? and data = ? and valortotal = ?");
+        clienteDAO = new ClienteDAO();
+        produtoDAO = new ProdutoDAO();
     }
 
     /**
@@ -51,10 +56,32 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
             tmp.setCliente(clienteDAO.Abrir(resultado.getInt(2)));
             tmp.setData(resultado.getDate(3));
             tmp.setValorTotal(resultado.getBigDecimal(4));
+            tmp.setItens(carregaProdutos(tmp));
         } catch (SQLException ex) {
             System.out.println("psc_persistencia.VendaDAO.preencheObjeto()");
         }
         return tmp;
+    }
+
+    private List<VendaItem> carregaProdutos(Venda obj) {
+        List<VendaItem> ret = new ArrayList<>();
+        String consulta = "select codigo,venda,produto,quantidade from vendaitem where venda = ?";
+        try {
+            PreparedStatement sql = conn.prepareStatement(consulta);
+            sql.setInt(1, obj.getCodigo());
+            ResultSet resultado = sql.executeQuery();
+            while (resultado.next()) {
+                VendaItem item = new VendaItem();
+                item.setCodigo(resultado.getInt(1));
+                item.setVenda(obj);
+                item.setProduto(produtoDAO.Abrir(resultado.getInt(3)));
+                item.setQuantidade(resultado.getInt(4));
+                ret.add(item);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return ret;
     }
 
     @Override
@@ -92,7 +119,7 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
                 }
             }
         }
-        return false;
+        return true;
     }
 
     /**
@@ -121,7 +148,7 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
     public Venda Abrir(int codigo) {
         try {
             PreparedStatement sql = conn.prepareStatement("select codigo,cliente,data,valortotal "
-                    + "from produto where codigo = ?");
+                    + "from venda where codigo = ?");
 
             sql.setInt(1, codigo);
             ResultSet resultado = sql.executeQuery();
@@ -145,6 +172,12 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
         if (filtro.getCliente() != null) {
             adicionarFiltro("cliente", " = ");
         }
+        if (filtro.getData() != null) {
+            adicionarFiltro("data", " = ");
+        }
+        if (filtro.getValorTotal() != null) {
+            adicionarFiltro("valortotal", " = ");
+        }
     }
 
     /**
@@ -161,6 +194,14 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
             }
             if (filtro.getCliente() != null) {
                 sql.setInt(cont, filtro.getCliente().getCodigo());
+                cont++;
+            }
+            if (filtro.getData() != null) {
+                sql.setDate(cont, filtro.getData());
+                cont++;
+            }
+            if (filtro.getValorTotal() != null) {
+                sql.setBigDecimal(cont, filtro.getValorTotal());
                 cont++;
             }
         } catch (SQLException ex) {

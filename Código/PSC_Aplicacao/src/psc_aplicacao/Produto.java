@@ -104,7 +104,7 @@ public class Produto implements Entidade {
 
     @Override
     public String toString() {
-        return this.nome + "( R$" + this.precoUnitario.toString() + ")";
+        return this.nome;
     }
 
 }
