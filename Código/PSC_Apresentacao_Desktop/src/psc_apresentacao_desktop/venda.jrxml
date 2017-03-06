@@ -29,21 +29,21 @@
 	<columnHeader>
 		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="66a4c7c1-95d3-40f7-80ba-9a6dd9416567"/>
+				<reportElement x="24" y="0" width="100" height="20" uuid="66a4c7c1-95d3-40f7-80ba-9a6dd9416567"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[codigo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="132" y="0" width="100" height="20" uuid="3f21689b-603f-449a-85fc-a976f735fac8"/>
+				<reportElement x="156" y="0" width="100" height="20" uuid="3f21689b-603f-449a-85fc-a976f735fac8"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[data]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="266" y="0" width="100" height="20" uuid="7d1834c6-9b87-49b5-b9ee-46b5f88b8d25"/>
+				<reportElement x="343" y="0" width="100" height="20" uuid="7d1834c6-9b87-49b5-b9ee-46b5f88b8d25"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -57,15 +57,15 @@
 	<detail>
 		<band height="125" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="46960519-499c-49d7-af39-badaa31dff0e"/>
+				<reportElement x="24" y="0" width="100" height="20" uuid="46960519-499c-49d7-af39-badaa31dff0e"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="132" y="0" width="100" height="20" uuid="b1941348-10ab-4019-b48f-cf342f52a8ba"/>
+				<reportElement x="156" y="0" width="100" height="20" uuid="b1941348-10ab-4019-b48f-cf342f52a8ba"/>
 				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="266" y="0" width="100" height="20" uuid="ee87f958-9ddd-4de1-b288-a0b4be14000c"/>
+				<reportElement x="343" y="0" width="100" height="20" uuid="ee87f958-9ddd-4de1-b288-a0b4be14000c"/>
 				<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
 			</textField>
 		</band>
