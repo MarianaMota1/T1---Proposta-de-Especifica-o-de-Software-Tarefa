@@ -15,11 +15,11 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="148" y="27" width="289" height="37" uuid="9241b8bd-f25e-4d4a-8d18-2fefd34480a7"/>
-				<textElement>
-					<font fontName="Comic Sans MS" size="18"/>
+				<reportElement x="12" y="27" width="525" height="37" uuid="9241b8bd-f25e-4d4a-8d18-2fefd34480a7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="20"/>
 				</textElement>
-				<text><![CDATA[LISTAGEM DE FUNCIONARIOS ]]></text>
+				<text><![CDATA[Listagem de Funcionarios  ]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -29,56 +29,66 @@
 	<columnHeader>
 		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="a0c05f2e-96d1-46da-b4a6-b123e284e790"/>
+				<reportElement x="12" y="0" width="100" height="20" uuid="a0c05f2e-96d1-46da-b4a6-b123e284e790"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="0" width="100" height="20" uuid="0b7ead32-5924-44fa-a014-a174548834ef"/>
+				<reportElement x="134" y="0" width="58" height="20" uuid="0b7ead32-5924-44fa-a014-a174548834ef"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[codigo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="0" width="100" height="20" uuid="29959f69-4e09-48c8-8887-fcde6db9bd1f"/>
+				<reportElement x="211" y="0" width="100" height="20" uuid="29959f69-4e09-48c8-8887-fcde6db9bd1f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[cpf]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="0" width="100" height="20" uuid="039f9a42-682c-4076-99d7-f537cf983e2e"/>
+				<reportElement x="323" y="0" width="100" height="20" uuid="039f9a42-682c-4076-99d7-f537cf983e2e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[rg]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="0" width="100" height="20" uuid="291455bf-19f7-4099-97f6-7e33fc313e42"/>
+				<reportElement x="437" y="0" width="118" height="20" uuid="291455bf-19f7-4099-97f6-7e33fc313e42"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[funcao]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="500" y="0" width="55" height="20" uuid="61437d0d-c78b-4cb3-b45b-51ce15bacb3c"/>
-				<text><![CDATA[senha]]></text>
-			</staticText>
+			<line>
+				<reportElement x="0" y="40" width="555" height="1" uuid="920507ec-2cc2-438a-bd02-c39792365d45"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="ae20f704-e7db-4cb2-b837-d37a37c64be2"/>
+				<reportElement x="12" y="0" width="100" height="20" uuid="ae20f704-e7db-4cb2-b837-d37a37c64be2"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="100" height="20" uuid="e29c5676-50a6-4906-94a5-1c5cbdac819d"/>
+				<reportElement x="134" y="0" width="58" height="20" uuid="e29c5676-50a6-4906-94a5-1c5cbdac819d"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="100" height="20" uuid="13ff04c0-22c3-4438-bb14-ec08a617452d"/>
+				<reportElement x="211" y="0" width="100" height="20" uuid="13ff04c0-22c3-4438-bb14-ec08a617452d"/>
 				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="0" width="100" height="20" uuid="546d1289-3f64-433e-8efb-33931c0c4042"/>
+				<reportElement x="323" y="0" width="100" height="20" uuid="546d1289-3f64-433e-8efb-33931c0c4042"/>
 				<textFieldExpression><![CDATA[$F{rg}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="100" height="20" uuid="f3bc7329-10ae-4571-ae94-c2936cf3ea50"/>
+				<reportElement x="437" y="0" width="118" height="20" uuid="f3bc7329-10ae-4571-ae94-c2936cf3ea50"/>
 				<textFieldExpression><![CDATA[$F{funcao}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="500" y="0" width="55" height="20" uuid="ba8125f2-7abd-4df7-b13e-6abc18782eba"/>
-				<textFieldExpression><![CDATA[$F{senha}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
