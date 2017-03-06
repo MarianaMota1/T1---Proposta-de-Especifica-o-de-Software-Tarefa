@@ -56,6 +56,7 @@ public class TelaEditarCliente extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Cliente");
 
         lblNome.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         lblNome.setText("Nome:");

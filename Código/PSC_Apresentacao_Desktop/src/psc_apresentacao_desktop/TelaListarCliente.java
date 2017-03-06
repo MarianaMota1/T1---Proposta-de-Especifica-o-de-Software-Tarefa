@@ -73,6 +73,7 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Clientes");
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel1.setText("Nome:");
@@ -145,7 +146,7 @@ public class TelaListarCliente extends javax.swing.JInternalFrame {
                     .addComponent(btnBuscar)
                     .addComponent(btnNovo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 

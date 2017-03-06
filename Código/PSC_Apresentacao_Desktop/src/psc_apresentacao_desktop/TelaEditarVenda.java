@@ -90,6 +90,7 @@ public class TelaEditarVenda extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Venda");
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {

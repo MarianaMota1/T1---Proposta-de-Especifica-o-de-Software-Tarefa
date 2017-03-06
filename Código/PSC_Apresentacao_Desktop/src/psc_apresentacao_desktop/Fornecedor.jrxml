@@ -11,19 +11,16 @@
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="79" splitType="Stretch">
+	<pageHeader>
+		<band height="98" splitType="Stretch">
 			<staticText>
-				<reportElement x="183" y="23" width="262" height="39" uuid="f1134d4d-09bc-4feb-b054-01d65f85967c"/>
+				<reportElement x="171" y="32" width="262" height="39" uuid="f1134d4d-09bc-4feb-b054-01d65f85967c"/>
 				<textElement>
 					<font fontName="Comic Sans MS" size="18"/>
 				</textElement>
 				<text><![CDATA[LISTAGEM DE FORNECEDOR  ]]></text>
 			</staticText>
 		</band>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="61" splitType="Stretch">

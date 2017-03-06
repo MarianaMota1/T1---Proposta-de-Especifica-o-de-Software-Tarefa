@@ -80,6 +80,7 @@ public class TelaListarVenda extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Vendas");
 
         tblBusca.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         tblBusca.setModel(new javax.swing.table.DefaultTableModel(

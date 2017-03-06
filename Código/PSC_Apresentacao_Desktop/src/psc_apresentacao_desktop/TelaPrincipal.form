@@ -84,6 +84,22 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuRelatorioClienteActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuRelatorioFuncionario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuRelatorioFuncionarioActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuRelatorioFornecedor">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fornecedor"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuRelatorioFornecedorActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>
@@ -91,6 +107,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Loja Lamendz Store"/>
     <Property name="extendedState" type="int" value="6"/>
   </Properties>
   <SyntheticProperties>
