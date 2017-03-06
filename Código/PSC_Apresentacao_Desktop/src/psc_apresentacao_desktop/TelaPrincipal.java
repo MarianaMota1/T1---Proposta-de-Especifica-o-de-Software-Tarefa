@@ -22,6 +22,8 @@ import net.sf.jasperreports.view.JasperViewer;
 import psc_aplicacao.ClienteRepositorio;
 import psc_aplicacao.FornecedorRepositorio;
 import psc_aplicacao.FuncionarioRepositorio;
+import psc_aplicacao.ProdutoRepositorio;
+import psc_aplicacao.VendaRepositorio;
 
 /**
  *
@@ -56,7 +58,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuRelatorio = new javax.swing.JMenu();
         mnuRelatorioCliente = new javax.swing.JMenuItem();
         mnuRelatorioFuncionario = new javax.swing.JMenuItem();
-        mnuRelatorioFornecedor = new javax.swing.JMenuItem();
+        mnuRelatorioVenda = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -131,13 +133,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuRelatorio.add(mnuRelatorioFuncionario);
 
-        mnuRelatorioFornecedor.setText("Fornecedor");
-        mnuRelatorioFornecedor.addActionListener(new java.awt.event.ActionListener() {
+        mnuRelatorioVenda.setText("Venda");
+        mnuRelatorioVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuRelatorioFornecedorActionPerformed(evt);
+                mnuRelatorioVendaActionPerformed(evt);
             }
         });
-        jMenuRelatorio.add(mnuRelatorioFornecedor);
+        jMenuRelatorio.add(mnuRelatorioVenda);
 
         jMenuBar1.add(jMenuRelatorio);
 
@@ -199,11 +201,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         exibeRelatorioJasper("Funcionario.jasper", dao.Buscar(null));
     }//GEN-LAST:event_mnuRelatorioFuncionarioActionPerformed
 
-    private void mnuRelatorioFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatorioFornecedorActionPerformed
+    private void mnuRelatorioVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatorioVendaActionPerformed
         // TODO add your handling code here:
-        FornecedorRepositorio dao = GerenciadorReferencias.getFornecedor();
-        exibeRelatorioJasper("Fornecedor.jasper", dao.Buscar(null));
-    }//GEN-LAST:event_mnuRelatorioFornecedorActionPerformed
+        VendaRepositorio dao = GerenciadorReferencias.getVenda();
+        exibeRelatorioJasper("Venda.jasper", dao.Buscar(null));
+    }//GEN-LAST:event_mnuRelatorioVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,7 +277,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemVenda;
     private javax.swing.JMenu jMenuRelatorio;
     private javax.swing.JMenuItem mnuRelatorioCliente;
-    private javax.swing.JMenuItem mnuRelatorioFornecedor;
     private javax.swing.JMenuItem mnuRelatorioFuncionario;
+    private javax.swing.JMenuItem mnuRelatorioVenda;
     // End of variables declaration//GEN-END:variables
 }

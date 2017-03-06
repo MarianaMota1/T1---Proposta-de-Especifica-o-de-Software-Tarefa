@@ -8,6 +8,7 @@
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="valorTotal" class="java.math.BigDecimal"/>
+	<field name="itens" class="java.util.List"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -54,6 +55,10 @@
 			<line>
 				<reportElement x="0" y="43" width="555" height="1" uuid="1d3ba1f1-70d6-44d4-b826-7855a07771b1"/>
 			</line>
+			<staticText>
+				<reportElement x="448" y="2" width="100" height="20" uuid="e237214c-c838-4a54-9aa2-232295dfac9c"/>
+				<text><![CDATA[itens]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -69,6 +74,10 @@
 			<textField>
 				<reportElement x="343" y="0" width="100" height="20" uuid="ee87f958-9ddd-4de1-b288-a0b4be14000c"/>
 				<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="0" width="100" height="20" uuid="1944b62f-3184-4cf4-a8bc-9b925cfa2157"/>
+				<textFieldExpression><![CDATA[""+$F{itens}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

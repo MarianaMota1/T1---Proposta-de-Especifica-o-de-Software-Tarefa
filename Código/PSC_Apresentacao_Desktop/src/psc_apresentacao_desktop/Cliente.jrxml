@@ -35,21 +35,21 @@
 				<textElement>
 					<font isBold="true" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[nome]]></text>
+				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="309" y="2" width="100" height="20" uuid="e47be295-d87a-4081-925c-279a19f21bf3"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[cpf]]></text>
+				<text><![CDATA[CPF]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="434" y="2" width="100" height="20" uuid="1bdead7e-7db0-470b-9208-91eac4387428"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[rg]]></text>
+				<text><![CDATA[RG]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="46" width="555" height="1" uuid="d5810417-42b3-4637-ae77-c7d7439161ab"/>

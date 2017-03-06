@@ -19,7 +19,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="20"/>
 				</textElement>
-				<text><![CDATA[Listagem de Produto]]></text>
+				<text><![CDATA[Listagem de Produtos]]></text>
 			</staticText>
 		</band>
 	</title>
