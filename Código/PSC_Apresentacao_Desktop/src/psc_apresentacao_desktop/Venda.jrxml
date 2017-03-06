@@ -4,7 +4,9 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="codigo" class="java.lang.Integer"/>
-	<field name="data" class="java.util.Date"/>
+	<field name="data" class="java.util.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="valorTotal" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
