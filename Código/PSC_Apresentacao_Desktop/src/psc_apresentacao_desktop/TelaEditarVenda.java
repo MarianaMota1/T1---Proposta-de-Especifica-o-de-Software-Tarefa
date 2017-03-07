@@ -127,6 +127,11 @@ public class TelaEditarVenda extends javax.swing.JInternalFrame {
         lblTotal.setText("jLabel1");
 
         cmbProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbProdutoActionPerformed(evt);
+            }
+        });
 
         lblNome3.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         lblNome3.setText("Produto:");
@@ -324,6 +329,10 @@ public class TelaEditarVenda extends javax.swing.JInternalFrame {
         itemSelecionado = entidade.getItens().get(linha);  //(VendaItem) tblItens.getModel().getValueAt(linha, 3);
         preencheCamposItem();
     }//GEN-LAST:event_tblProdutoMouseClicked
+
+    private void cmbProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbProdutoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

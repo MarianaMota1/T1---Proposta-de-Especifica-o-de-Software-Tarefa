@@ -5,6 +5,8 @@
  */
 package psc_apresentacao_desktop;
 
+import java.awt.Color;
+import static java.awt.Color.black;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +38,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        
+        getContentPane().setBackground(black);
     }
 
     /**
@@ -48,6 +52,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuGerenciar = new javax.swing.JMenu();
         jMenuItemClientes = new javax.swing.JMenuItem();
@@ -58,17 +64,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuRelatorio = new javax.swing.JMenu();
         mnuRelatorioCliente = new javax.swing.JMenuItem();
         mnuRelatorioFuncionario = new javax.swing.JMenuItem();
-        mnuRelatorioVenda = new javax.swing.JMenuItem();
+        mnuRelatorioFornecedor = new javax.swing.JMenuItem();
+        mnuRelatorioProduto = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
+        jLabel2.setText("jLabel2");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Loja Lamendz Store");
+        setBackground(new java.awt.Color(0, 0, 0));
         setExtendedState(6);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/logo2 - Copia.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, -1, -1));
+
+        jMenuGerenciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/gerenciar.jpg"))); // NOI18N
         jMenuGerenciar.setText("Gerenciar");
+        jMenuGerenciar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         jMenuItemClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemClientes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jMenuItemClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/cliente.png"))); // NOI18N
         jMenuItemClientes.setText("Cliente");
         jMenuItemClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +96,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuGerenciar.add(jMenuItemClientes);
 
         jMenuItemFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemFuncionario.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jMenuItemFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/funcionario.png"))); // NOI18N
         jMenuItemFuncionario.setText("Funcionário");
         jMenuItemFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +107,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuGerenciar.add(jMenuItemFuncionario);
 
         jMenuItemFornecedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemFornecedor.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jMenuItemFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/fornecedor.jpeg"))); // NOI18N
         jMenuItemFornecedor.setText("Fornecedor");
         jMenuItemFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +118,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuGerenciar.add(jMenuItemFornecedor);
 
         jMenuItemProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemProduto.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jMenuItemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/produto.jpg"))); // NOI18N
         jMenuItemProduto.setText("Produto");
         jMenuItemProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +129,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuGerenciar.add(jMenuItemProduto);
 
         jMenuItemVenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemVenda.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jMenuItemVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/venda.png"))); // NOI18N
         jMenuItemVenda.setText("Venda");
         jMenuItemVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,8 +141,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuGerenciar);
 
+        jMenuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/relatorios.png"))); // NOI18N
         jMenuRelatorio.setText("Relatório");
+        jMenuRelatorio.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
+        mnuRelatorioCliente.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuRelatorioCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/relatorioC.png"))); // NOI18N
         mnuRelatorioCliente.setText("Cliente");
         mnuRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +155,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuRelatorio.add(mnuRelatorioCliente);
 
+        mnuRelatorioFuncionario.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuRelatorioFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/relatorioFu.jpg"))); // NOI18N
         mnuRelatorioFuncionario.setText("Funcionário");
         mnuRelatorioFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,28 +165,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuRelatorio.add(mnuRelatorioFuncionario);
 
-        mnuRelatorioVenda.setText("Venda");
-        mnuRelatorioVenda.addActionListener(new java.awt.event.ActionListener() {
+        mnuRelatorioFornecedor.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuRelatorioFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/relatorioF.jpg"))); // NOI18N
+        mnuRelatorioFornecedor.setText("Fornecedor");
+        mnuRelatorioFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuRelatorioVendaActionPerformed(evt);
+                mnuRelatorioFornecedorActionPerformed(evt);
             }
         });
-        jMenuRelatorio.add(mnuRelatorioVenda);
+        jMenuRelatorio.add(mnuRelatorioFornecedor);
+
+        mnuRelatorioProduto.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        mnuRelatorioProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/relatorioP.png"))); // NOI18N
+        mnuRelatorioProduto.setText("Produto");
+        mnuRelatorioProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRelatorioProdutoActionPerformed(evt);
+            }
+        });
+        jMenuRelatorio.add(mnuRelatorioProduto);
 
         jMenuBar1.add(jMenuRelatorio);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 503, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -201,11 +234,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         exibeRelatorioJasper("Funcionario.jasper", dao.Buscar(null));
     }//GEN-LAST:event_mnuRelatorioFuncionarioActionPerformed
 
-    private void mnuRelatorioVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatorioVendaActionPerformed
+    private void mnuRelatorioFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatorioFornecedorActionPerformed
         // TODO add your handling code here:
-        VendaRepositorio dao = GerenciadorReferencias.getVenda();
-        exibeRelatorioJasper("Venda.jasper", dao.Buscar(null));
-    }//GEN-LAST:event_mnuRelatorioVendaActionPerformed
+        FornecedorRepositorio dao = GerenciadorReferencias.getFornecedor();
+        exibeRelatorioJasper("Fornecedor.jasper", dao.Buscar(null));
+    }//GEN-LAST:event_mnuRelatorioFornecedorActionPerformed
+
+    private void mnuRelatorioProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatorioProdutoActionPerformed
+        // TODO add your handling code here:
+        ProdutoRepositorio dao = GerenciadorReferencias.getProduto();
+        exibeRelatorioJasper("Produto.jasper", dao.Buscar(null));
+    }//GEN-LAST:event_mnuRelatorioProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,6 +306,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuGerenciar;
     private javax.swing.JMenuItem jMenuItem1;
@@ -277,7 +318,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemVenda;
     private javax.swing.JMenu jMenuRelatorio;
     private javax.swing.JMenuItem mnuRelatorioCliente;
+    private javax.swing.JMenuItem mnuRelatorioFornecedor;
     private javax.swing.JMenuItem mnuRelatorioFuncionario;
-    private javax.swing.JMenuItem mnuRelatorioVenda;
+    private javax.swing.JMenuItem mnuRelatorioProduto;
     // End of variables declaration//GEN-END:variables
 }
