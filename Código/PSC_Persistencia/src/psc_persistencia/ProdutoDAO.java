@@ -21,13 +21,13 @@ import psc_aplicacao.ProdutoRepositorio;
 public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositorio {
 
     public ProdutoDAO() {
-        setConsultaAbrir("select codigo,nome,descricao,precounitario from produto where codigo = ?");
+        setConsultaAbrir("select codigo,nome,qtd,descricao,precounitario from produto where codigo = ?");
         setConsultaApagar("DELETE FROM produto WHERE codigo = ?");
-        setConsultaInserir("INSERT INTO produto(nome,descricao,precounitario) VALUES(?,?,?)");
-        setConsultaAlterar("UPDATE produto SET nome = ?, "
+        setConsultaInserir("INSERT INTO produto(nome,qtd,descricao,precounitario) VALUES(?,?,?,?)");
+        setConsultaAlterar("UPDATE produto SET nome = ?, qtd = ?, "
                 + "descricao = ?, precounitario = ? WHERE codigo = ?");
-        setConsultaBusca("select codigo,nome,descricao,precounitario from produto ");
-        setConsultaUltimoCodigo("select max(codigo) from produto where nome = ? and descricao = ? and precounitario = ?");
+        setConsultaBusca("select codigo,nome,qtd,descricao,precounitario from produto ");
+        setConsultaUltimoCodigo("select max(codigo) from produto where nome = ? and qtd = ? and descricao = ? and precounitario = ?");
     }
 
     /**
@@ -41,8 +41,9 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
         try {
             tmp.setCodigo(resultado.getInt(1));
             tmp.setNome(resultado.getString(2));
-            tmp.setDescricao(resultado.getString(3));
-            tmp.setPrecoUnitario(resultado.getBigDecimal(4));
+            tmp.setQtd(resultado.getInt(3));
+            tmp.setDescricao(resultado.getString(4));
+            tmp.setPrecoUnitario(resultado.getBigDecimal(5));
         } catch (SQLException | ErroValidacao ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,10 +58,11 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
     protected void preencheConsulta(PreparedStatement sql, Produto obj) {
         try {
             sql.setString(1, obj.getNome());
-            sql.setString(2, obj.getDescricao());
-            sql.setBigDecimal(3, obj.getPrecoUnitario());
+            sql.setInt(2, obj.getQtd());
+            sql.setString(3, obj.getDescricao());
+            sql.setBigDecimal(4, obj.getPrecoUnitario());
             if (obj.getCodigo() > 0) {
-                sql.setInt(4, obj.getCodigo());
+                sql.setInt(5, obj.getCodigo());
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,7 +76,7 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
     @Override
     public Produto Abrir(int codigo) {
         try {
-            PreparedStatement sql = conn.prepareStatement("select codigo,nome,descricao,precounitario "
+            PreparedStatement sql = conn.prepareStatement("select codigo,nome,qtd,descricao,precounitario "
                     + "from produto where codigo = ?");
 
             sql.setInt(1, codigo);
@@ -99,10 +101,13 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
         if (filtro.getNome() != null) {
             adicionarFiltro("nome", " like ");
         }
-        if (filtro.getDescricao()!= null) {
+        if (filtro.getQtd() > 0) {
+            adicionarFiltro("qtd", "=");
+        }
+        if (filtro.getDescricao() != null) {
             adicionarFiltro("descricao", "=");
         }
-        if (filtro.getPrecoUnitario()!= null) {
+        if (filtro.getPrecoUnitario() != null) {
             adicionarFiltro("precounitario", "=");
         }
     }
@@ -123,11 +128,15 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
                 sql.setString(cont, filtro.getNome() + "%");
                 cont++;
             }
-            if (filtro.getDescricao()!= null) {
+            if (filtro.getQtd() > 0) {
+                sql.setInt(cont, filtro.getQtd());
+                cont++;
+            }
+            if (filtro.getDescricao() != null) {
                 sql.setString(cont, filtro.getDescricao());
                 cont++;
             }
-            if (filtro.getPrecoUnitario()!= null) {
+            if (filtro.getPrecoUnitario() != null) {
                 sql.setBigDecimal(cont, filtro.getPrecoUnitario());
                 cont++;
             }

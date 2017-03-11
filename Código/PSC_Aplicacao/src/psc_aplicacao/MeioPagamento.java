@@ -13,6 +13,7 @@ public class MeioPagamento implements Entidade {
 
     private int codigo;
     private String meioPagamento;
+    private Venda venda;
 
     public MeioPagamento(int codigo, String meioPagamento) {
         this.codigo = codigo;
@@ -35,6 +36,14 @@ public class MeioPagamento implements Entidade {
 
     public void setMeioPagamento(String meioPagamento) {
         this.meioPagamento = meioPagamento;
+    }
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
     }
 
 }

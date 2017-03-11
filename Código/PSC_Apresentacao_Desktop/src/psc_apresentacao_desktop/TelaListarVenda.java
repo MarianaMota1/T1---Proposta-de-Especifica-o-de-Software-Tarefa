@@ -48,10 +48,14 @@ public class TelaListarVenda extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codigo");
         modelo.addColumn("Cliente");
+        modelo.addColumn("Forma");
+        modelo.addColumn("Meio");
         for (Venda v : lista) {
             Vector linha = new Vector();
             linha.add(v.getCodigo());
             linha.add(v.getCliente().getNome());
+            linha.add(v.getFormaPagamento().getTipoPagamento());
+            linha.add(v.getMeioPagamento().getMeioPagamento());
             modelo.addRow(linha);
         }
         tblBusca.setModel(modelo);

@@ -32,12 +32,14 @@
                   <Component id="lblNome1" alignment="0" pref="72" max="32767" attributes="0"/>
                   <Component id="lblNome" alignment="0" max="32767" attributes="0"/>
                   <Component id="lblNome2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="lblNome3" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="txtPreco" max="32767" attributes="0"/>
                   <Component id="txtDescricao" max="32767" attributes="0"/>
                   <Component id="txtNome" alignment="1" pref="201" max="32767" attributes="0"/>
+                  <Component id="txtQtd" alignment="1" pref="201" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -64,6 +66,11 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblNome3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtQtd" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblNome1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -72,14 +79,14 @@
                   <Component id="lblNome2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPreco" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" max="-2" attributes="0">
                   <Component id="btnApagar" alignment="3" max="32767" attributes="0"/>
                   <Component id="btnSalvar" alignment="3" max="32767" attributes="0"/>
                   <Component id="btnNovo" alignment="3" max="32767" attributes="0"/>
                   <Component id="btnListar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -146,6 +153,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtQtd">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNome3">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="16" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Qtd:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

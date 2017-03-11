@@ -16,12 +16,14 @@ public class Produto implements Entidade {
 
     private int codigo;
     private String nome;
+    private int qtd;
     private String descricao;
     private BigDecimal precoUnitario;
 
-    public Produto(int codigo, String nome, String descricao, BigDecimal precoUnitario) {
+    public Produto(int codigo, String nome, int qtd, String descricao, BigDecimal precoUnitario) {
         this.codigo = codigo;
         this.nome = nome;
+        this.qtd = qtd;
         this.descricao = descricao;
         this.precoUnitario = precoUnitario;
     }
@@ -29,7 +31,7 @@ public class Produto implements Entidade {
     public Produto() {
 
     }
-    
+
     public int getCodigo() {
         return codigo;
     }
@@ -66,6 +68,14 @@ public class Produto implements Entidade {
 
     public void setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
+    }
+
+    public int getQtd() {
+        return qtd;
+    }
+
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
     }
 
     @Override

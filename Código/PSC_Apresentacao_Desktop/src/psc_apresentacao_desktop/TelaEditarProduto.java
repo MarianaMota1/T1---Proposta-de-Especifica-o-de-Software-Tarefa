@@ -54,6 +54,8 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
         txtPreco = new javax.swing.JTextField();
         lblNome2 = new javax.swing.JLabel();
         btnNovo = new javax.swing.JButton();
+        txtQtd = new javax.swing.JTextField();
+        lblNome3 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -98,6 +100,9 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
             }
         });
 
+        lblNome3.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        lblNome3.setText("Qtd:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,12 +112,14 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblNome1, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
                     .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblNome2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblNome2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNome3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtPreco)
                     .addComponent(txtDescricao)
-                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                    .addComponent(txtQtd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(48, Short.MAX_VALUE)
@@ -134,19 +141,23 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNome3)
+                    .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome1)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome2)
                     .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(btnApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnListar))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -180,7 +191,7 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
         if (JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja apagar o Cliente?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
             if (dao.Apagar(entidade)) {
                 JOptionPane.showMessageDialog(rootPane, "Operação concluída com sucesso!");
-                entidade = new Produto(0, null, null, new BigDecimal(0));
+                entidade = new Produto(0, null, 0, null, new BigDecimal(0));
                 btnApagar.setVisible(false);
                 preencheCampos();
             } else {
@@ -193,7 +204,7 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        entidade = new Produto(0, null, null, new BigDecimal(0));
+        entidade = new Produto(0, null, 0, null, new BigDecimal(0));
         btnApagar.setVisible(false);
         preencheCampos();
     }//GEN-LAST:event_btnNovoActionPerformed
@@ -207,9 +218,11 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNome1;
     private javax.swing.JLabel lblNome2;
+    private javax.swing.JLabel lblNome3;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPreco;
+    private javax.swing.JTextField txtQtd;
     // End of variables declaration//GEN-END:variables
 
     public Produto getEntidade() {
@@ -226,12 +239,14 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
 
     private void preencheObjeto() throws ErroValidacao {
         entidade.setNome(txtNome.getText());
+        entidade.setQtd(Integer.parseInt(txtQtd.getText()));
         entidade.setDescricao(txtDescricao.getText());
         entidade.setPrecoUnitario((new BigDecimal(txtPreco.getText())));
     }
 
     private void preencheCampos() {
         txtNome.setText(entidade.getNome());
+        txtQtd.setText(Integer.toString(entidade.getQtd()));
         txtDescricao.setText(entidade.getDescricao());
         txtPreco.setText(entidade.getPrecoUnitario().toString());
     }

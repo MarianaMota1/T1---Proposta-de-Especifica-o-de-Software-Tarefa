@@ -38,17 +38,19 @@ public class TelaListarProduto extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codigo");
         modelo.addColumn("Nome");
+        modelo.addColumn("Qtd");
         for (Produto p : lista) {
             Vector linha = new Vector();
             linha.add(p.getCodigo());
             linha.add(p.getNome());
+            linha.add(p.getQtd());
             modelo.addRow(linha);
         }
         tblBusca.setModel(modelo);
     }
 
     public void buscar(String nome) {
-        Produto filtro = new Produto(0, nome, null, null);
+        Produto filtro = new Produto(0, nome, 0, null, null);
         List<Produto> busca = dao.Buscar(filtro);
         preencheTabela(busca);
     }
@@ -170,7 +172,7 @@ public class TelaListarProduto extends javax.swing.JInternalFrame {
     public void editarProduto(int codigo) {
         Produto entidade;
         if (codigo == 0) {
-            entidade = new Produto(0, null, null, new BigDecimal(0));
+            entidade = new Produto(0, null, 0, null, new BigDecimal(0));
         } else {
             entidade = dao.Abrir(codigo);
         }

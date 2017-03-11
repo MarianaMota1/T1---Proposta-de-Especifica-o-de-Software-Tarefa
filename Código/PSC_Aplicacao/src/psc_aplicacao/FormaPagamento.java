@@ -13,6 +13,7 @@ public class FormaPagamento {
 
     private int codigo;
     private String tipoPagamento;
+    private Venda venda;
 
     public FormaPagamento(int codigo, String tipoPagamento) {
         this.codigo = codigo;
@@ -33,6 +34,14 @@ public class FormaPagamento {
 
     public void setTipoPagamento(String tipoPagamento) {
         this.tipoPagamento = tipoPagamento;
+    }
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
     }
 
 }

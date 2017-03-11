@@ -16,8 +16,10 @@ import java.util.logging.Logger;
 import psc_aplicacao.Cliente;
 import psc_aplicacao.ClienteRepositorio;
 import psc_aplicacao.ErroValidacao;
+import psc_aplicacao.FormaPagamento;
 import psc_aplicacao.Fornecedor;
 import psc_aplicacao.FornecedorRepositorio;
+import psc_aplicacao.MeioPagamento;
 import psc_aplicacao.Venda;
 import psc_aplicacao.VendaItem;
 import psc_aplicacao.VendaRepositorio;
@@ -43,6 +45,19 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
         produtoDAO = new ProdutoDAO();
     }
 
+    @Override
+    public boolean Apagar(Venda obj) {
+        try {
+            PreparedStatement sql = conn.prepareStatement("delete from vendaitem where venda = ?");
+            sql.setInt(1, obj.getCodigo());
+            sql.executeUpdate();
+            return super.Apagar(obj);
+        } catch (SQLException ex) {
+            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
     /**
      *
      * @param resultado
@@ -56,11 +71,49 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
             tmp.setCliente(clienteDAO.Abrir(resultado.getInt(2)));
             tmp.setData(resultado.getDate(3));
             tmp.setValorTotal(resultado.getBigDecimal(4));
+            tmp.setFormaPagamento(carregaFormaPagamento(tmp));
+            tmp.setMeioPagamento(carregaMeioPagamento(tmp));
             tmp.setItens(carregaProdutos(tmp));
         } catch (SQLException ex) {
             System.out.println("psc_persistencia.VendaDAO.preencheObjeto()");
         }
         return tmp;
+    }
+
+    private MeioPagamento carregaMeioPagamento(Venda obj) {
+        MeioPagamento item = new MeioPagamento(0, null);
+        String consulta = "select codigo,meiopagamento,venda from meiopagamento where venda = ?";
+        try {
+            PreparedStatement sql = conn.prepareStatement(consulta);
+            sql.setInt(1, obj.getCodigo());
+            ResultSet resultado = sql.executeQuery();
+            if (resultado.next()) {
+                item.setCodigo(resultado.getInt(1));
+                item.setMeioPagamento(resultado.getString(2));
+                item.setVenda(obj);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return item;
+    }
+
+    private FormaPagamento carregaFormaPagamento(Venda obj) {
+        FormaPagamento item = new FormaPagamento(0, null);
+        String consulta = "select codigo,tipopagamento,venda from formapagamento where venda = ?";
+        try {
+            PreparedStatement sql = conn.prepareStatement(consulta);
+            sql.setInt(1, obj.getCodigo());
+            ResultSet resultado = sql.executeQuery();
+            if (resultado.next()) {
+                item.setCodigo(resultado.getInt(1));
+                item.setTipoPagamento(resultado.getString(2));
+                item.setVenda(obj);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return item;
     }
 
     private List<VendaItem> carregaProdutos(Venda obj) {
@@ -90,33 +143,71 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
             return false;
         }
         if (obj.getCodigo() > 0) {
-            for (VendaItem item : obj.getItens()) {
-                if (item.getCodigo() == 0) {
-                    try {
+            try {
+
+                if (obj.getFormaPagamento().getCodigo() > 0) {
+                    String consulta1 = "insert into formapagamento(tipopagamento,venda) values(?,?)";
+                    PreparedStatement sql1 = conn.prepareStatement(consulta1);
+                    sql1.setString(1, obj.getFormaPagamento().getTipoPagamento());
+                    sql1.setInt(2, obj.getCodigo());
+                    sql1.executeUpdate();
+                } else {
+                    String consulta1 = "update formapagamento set tipopagamento =? where venda = ?";
+                    PreparedStatement sql1 = conn.prepareStatement(consulta1);
+                    sql1.setString(1, obj.getFormaPagamento().getTipoPagamento());
+                    sql1.setInt(2, obj.getCodigo());
+                    sql1.executeUpdate();
+                }
+
+                if (obj.getFormaPagamento().getCodigo() > 0) {
+                    String consulta2 = "insert into meiopagamento(meiopagamento,venda) values(?,?)";
+                    PreparedStatement sql2 = conn.prepareStatement(consulta2);
+                    sql2.setString(1, obj.getMeioPagamento().getMeioPagamento());
+                    sql2.setInt(2, obj.getCodigo());
+                    sql2.executeUpdate();
+                } else {
+                    String consulta2 = "update meiopagamento set meiopagamento = ? where venda = ?";
+                    PreparedStatement sql2 = conn.prepareStatement(consulta2);
+                    sql2.setString(1, obj.getMeioPagamento().getMeioPagamento());
+                    sql2.setInt(2, obj.getCodigo());
+                    sql2.executeUpdate();
+                }
+
+                for (VendaItem item : obj.getItens()) {
+                    if (item.getCodigo() == 0) {
+                        String consulta3 = "update produto set qtd = ? where codigo = ?";
+                        PreparedStatement sql3 = conn.prepareStatement(consulta3);
+                        sql3.setInt(1, item.getProduto().getQtd() - item.getQuantidade());
+                        sql3.setInt(2, item.getProduto().getCodigo());
+                        sql3.executeUpdate();
+
                         String consulta = "insert into vendaitem(venda, produto,quantidade) values(?,?,?)";
                         PreparedStatement sql = conn.prepareStatement(consulta);
                         sql.setInt(1, obj.getCodigo());
                         sql.setInt(2, item.getProduto().getCodigo());
                         sql.setInt(3, item.getQuantidade());
                         sql.executeUpdate();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
-                        return false;
-                    }
-                } else {
-                    try {
-                        String consulta = "update vendaitem set venda = ?, produto = ?,quantidade = ? where codigo = ?";
-                        PreparedStatement sql = conn.prepareStatement(consulta);
-                        sql.setInt(1, obj.getCodigo());
-                        sql.setInt(2, item.getProduto().getCodigo());
-                        sql.setInt(3, item.getQuantidade());
-                        sql.setInt(4, item.getCodigo());
-                        sql.executeUpdate();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
-                        return false;
+                    } else {
+                        try {
+                            String consulta = "update vendaitem set venda = ?, produto = ?,quantidade = ? where codigo = ?";
+                            PreparedStatement sql = conn.prepareStatement(consulta);
+                            sql.setInt(1, obj.getCodigo());
+                            sql.setInt(2, item.getProduto().getCodigo());
+                            sql.setInt(3, item.getQuantidade());
+                            sql.setInt(4, item.getCodigo());
+                            sql.executeUpdate();
+
+                        } catch (SQLException ex) {
+                            Logger.getLogger(VendaDAO.class
+                                    .getName()).log(Level.SEVERE, null, ex);
+                            return false;
+                        }
                     }
                 }
+            } catch (SQLException ex) {
+                Logger.getLogger(VendaDAO.class
+                        .getName()).log(Level.SEVERE, null, ex);
+                return false;
             }
         }
         return true;

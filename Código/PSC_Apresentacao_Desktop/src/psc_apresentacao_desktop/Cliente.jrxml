@@ -11,9 +11,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="92" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="34" width="555" height="29" uuid="d0acd63c-df59-49dc-be29-5c2a2eb3a89f"/>
+				<reportElement x="0" y="19" width="555" height="29" uuid="d0acd63c-df59-49dc-be29-5c2a2eb3a89f"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="20"/>
 				</textElement>
@@ -22,7 +22,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="31" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="69" height="20" uuid="6f623d67-e46f-4036-bb2b-34f8cfe0d107"/>
 				<textElement>
@@ -38,13 +38,6 @@
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="178" y="0" width="76" height="20" uuid="e47be295-d87a-4081-925c-279a19f21bf3"/>
-				<textElement>
-					<font fontName="Times New Roman" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CPF]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="290" y="0" width="100" height="20" uuid="1bdead7e-7db0-470b-9208-91eac4387428"/>
 				<textElement>
 					<font fontName="Times New Roman" size="14" isBold="true"/>
@@ -52,12 +45,19 @@
 				<text><![CDATA[RG]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="46" width="555" height="1" uuid="d5810417-42b3-4637-ae77-c7d7439161ab"/>
+				<reportElement x="0" y="24" width="555" height="1" uuid="d5810417-42b3-4637-ae77-c7d7439161ab"/>
 			</line>
+			<staticText>
+				<reportElement x="178" y="4" width="40" height="20" uuid="5bbb76d2-23c9-4f67-9bf3-77e9a805ad8e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="31" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="55" height="20" uuid="8876f3bb-85ff-44bc-92ac-379926570b93"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
@@ -80,7 +80,19 @@
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="503" y="0" width="52" height="20" uuid="37cba2b7-757b-4baa-9e53-c1848be24e5b"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="453" y="0" width="50" height="20" uuid="018e3ab3-2319-4a85-92a3-c4b4215a3e37"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Página:]]></text>
+			</staticText>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

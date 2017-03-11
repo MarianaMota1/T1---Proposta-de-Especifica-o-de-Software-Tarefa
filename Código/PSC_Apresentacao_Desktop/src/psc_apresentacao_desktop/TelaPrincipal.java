@@ -38,7 +38,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
-        
+
         getContentPane().setBackground(black);
     }
 
@@ -53,7 +53,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuGerenciar = new javax.swing.JMenu();
         jMenuItemClientes = new javax.swing.JMenuItem();
@@ -75,10 +75,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setTitle("Loja Lamendz Store");
         setBackground(new java.awt.Color(0, 0, 0));
         setExtendedState(6);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/logo2 - Copia.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, -1, -1));
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/logo2 - Copia.jpg"))); // NOI18N
 
         jMenuGerenciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/icones/gerenciar.jpg"))); // NOI18N
         jMenuGerenciar.setText("Gerenciar");
@@ -189,12 +187,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(lblLogo)
+                .addContainerGap(176, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 62, Short.MAX_VALUE))
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClientesActionPerformed
         TelaListarCliente tela = new TelaListarCliente();
         this.add(tela);
+        lblLogo.setVisible(false);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemClientesActionPerformed
 
@@ -207,24 +222,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItemFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFuncionarioActionPerformed
         TelaListarFuncionario tela = new TelaListarFuncionario();
         this.add(tela);
+        lblLogo.setVisible(false);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemFuncionarioActionPerformed
 
     private void jMenuItemFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFornecedorActionPerformed
         TelaListarFornecedor tela = new TelaListarFornecedor();
         this.add(tela);
+        lblLogo.setVisible(false);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemFornecedorActionPerformed
 
     private void jMenuItemProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProdutoActionPerformed
         TelaListarProduto tela = new TelaListarProduto();
         this.add(tela);
+        lblLogo.setVisible(false);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemProdutoActionPerformed
 
     private void jMenuItemVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVendaActionPerformed
         TelaListarVenda tela = new TelaListarVenda();
         this.add(tela);
+        lblLogo.setVisible(false);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemVendaActionPerformed
 
@@ -306,7 +325,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuGerenciar;
@@ -317,6 +335,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemProduto;
     private javax.swing.JMenuItem jMenuItemVenda;
     private javax.swing.JMenu jMenuRelatorio;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JMenuItem mnuRelatorioCliente;
     private javax.swing.JMenuItem mnuRelatorioFornecedor;
     private javax.swing.JMenuItem mnuRelatorioFuncionario;

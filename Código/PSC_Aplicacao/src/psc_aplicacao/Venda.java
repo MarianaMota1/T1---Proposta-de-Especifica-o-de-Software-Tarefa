@@ -22,6 +22,8 @@ public class Venda implements Entidade {
     private Cliente cliente;
     private Date data;
     private BigDecimal valorTotal;
+    private FormaPagamento formaPagamento;
+    private MeioPagamento meioPagamento;
     private List<VendaItem> itens;
 
     public Venda() {
@@ -95,6 +97,8 @@ public class Venda implements Entidade {
         this.cliente = cliente;
         this.data = data;
         this.valorTotal = valorTotal;
+        this.formaPagamento = new FormaPagamento(0, null);
+        this.meioPagamento = new MeioPagamento(0, null);
         itens = new ArrayList<>();
     }
 
@@ -134,6 +138,22 @@ public class Venda implements Entidade {
             return false;
         }
         return Objects.equals(this.itens, other.itens);
+    }
+
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    public MeioPagamento getMeioPagamento() {
+        return meioPagamento;
+    }
+
+    public void setMeioPagamento(MeioPagamento meioPagamento) {
+        this.meioPagamento = meioPagamento;
     }
 
     @Override
