@@ -84,7 +84,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuItemClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemClientes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jMenuItemClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/psc_apresentacao_desktop/cliente.png"))); // NOI18N
+        jMenuItemClientes.setIcon(new javax.swing.ImageIcon("C:\\Users\\Mary\\Documents\\TADS\\8º Período\\PSC\\PSC\\Trabalho-Final-DSC\\Código\\PSC_Apresentacao_Desktop\\src\\psc_apresentacao_desktop\\icones\\cliente.png")); // NOI18N
         jMenuItemClientes.setText("Cliente");
         jMenuItemClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,15 +192,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(lblLogo)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addGap(118, 118, 118)
+                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 62, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
