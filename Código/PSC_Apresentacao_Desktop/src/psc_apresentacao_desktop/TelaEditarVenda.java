@@ -435,8 +435,8 @@ public class TelaEditarVenda extends javax.swing.JInternalFrame {
     private void preencheCampos() {
         cmbCliente.setSelectedItem(entidade.getCliente());
         txtData.setText(df.format(entidade.getData()));
-        cmbFormaPagamento.setSelectedItem(entidade.getFormaPagamento().getTipoPagamento());
-        cmbMeioPagamento.setSelectedItem(entidade.getMeioPagamento().getMeioPagamento());
+        cmbFormaPagamento.setSelectedItem(entidade.getFormaPagamento()/*.getTipoPagamento()*/);
+        cmbMeioPagamento.setSelectedItem(entidade.getMeioPagamento()/*.getMeioPagamento()*/);
         lblTotal.setText(entidade.getValorTotal().toString());
         preencheCampoTabela();
     }
